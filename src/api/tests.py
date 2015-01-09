@@ -2,10 +2,10 @@ from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
-from nose.tools import assert_equal, assert_in, ok_
-from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
+from nose.tools import assert_equal
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 
-from django.contrib.auth.models import User as UserAuth, AnonymousUser
+from django.contrib.auth.models import User as UserAuth
 from .models import Request
 from .serializers import RequestSerializer
 from .views import router
@@ -47,6 +47,10 @@ class RequestDetailViewAuthenticationTests (AssisiApiTestCase):
 
         return auth, request, kwargs, view, url
 
+    ###########################################################################
+    # Anonymous User Tests
+    ###########################################################################
+
     def test_anonymous_cannot_GET_detail(self):
         url = self.init_test_assets()[-1]
         response = self.client.get(url)
@@ -69,3 +73,32 @@ class RequestDetailViewAuthenticationTests (AssisiApiTestCase):
         url = reverse('request-list')
         response = self.client.post(url, data='{"name": "Vito", "address": "555 Foo St", "zip": "12345"}', content_type='application/json')
         assert_equal(response.status_code, HTTP_201_CREATED)
+
+    ###########################################################################
+    # Admin User Tests
+    ###########################################################################
+
+    def test_admin_can_GET_detail(self):
+        auth, _, _, _, url = self.init_test_assets()
+        self.client.login(username=auth.username, password='123')
+        response = self.client.get(url)
+        assert_equal(response.status_code, HTTP_200_OK)
+
+    def test_admin_can_PUT_detail(self):
+        auth, _, _, _, url = self.init_test_assets()
+        self.client.login(username=auth.username, password='123')
+        response = self.client.put(url, data='{"name": "Vito", "address": "555 Foo St", "zip": "12345"}', content_type='application/json')
+        assert_equal(response.status_code, HTTP_200_OK, (response.status_code, str(response)))
+
+    def test_admin_can_DELETE_detail(self):
+        auth, _, _, _, url = self.init_test_assets()
+        self.client.login(username=auth.username, password='123')
+        response = self.client.delete(url)
+        assert_equal(response.status_code, HTTP_204_NO_CONTENT)
+
+    def test_admin_can_POST_detail(self):
+        auth, _, _, _, _ = self.init_test_assets()
+        url = reverse('request-list')
+        self.client.login(username=auth.username, password='123')
+        response = self.client.post(url, data='{"name": "Vito", "address": "555 Foo St", "zip": "12345"}', content_type='application/json')
+        assert_equal(response.status_code, HTTP_201_CREATED, (response.status_code, str(response)))
