@@ -51,3 +51,16 @@ class RequestDetailViewAuthenticationTests (AssisiApiTestCase):
         url = self.init_test_assets()[-1]
         response = self.client.get(url)
         assert_equal(response.status_code, HTTP_403_FORBIDDEN)
+
+    def test_anonymous_cannot_PUT_detail(self):
+        url = self.init_test_assets()[-1]
+        response = self.client.put(url, data='{"name": "Vito", "address": "555 Foo St", "zip": "12345"}', content_type='application/json')
+        # Even though the user is unauthenticated and a 401 seems like it might
+        # be in order, we don't want a www-authenticate response header to be
+        # sent, so we'll send a 403.
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN)
+
+    def test_anonymous_cannot_DELETE_detail(self):
+        url = self.init_test_assets()[-1]
+        response = self.client.delete(url)
+        assert_equal(response.status_code, HTTP_403_FORBIDDEN)
