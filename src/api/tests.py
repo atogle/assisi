@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
 from nose.tools import assert_equal, assert_in, ok_
-from rest_framework.status import HTTP_200_OK, HTTP_204_NO_CONTENT, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 
 from django.contrib.auth.models import User as UserAuth, AnonymousUser
 from .models import Request
@@ -64,3 +64,8 @@ class RequestDetailViewAuthenticationTests (AssisiApiTestCase):
         url = self.init_test_assets()[-1]
         response = self.client.delete(url)
         assert_equal(response.status_code, HTTP_403_FORBIDDEN)
+
+    def test_anonymous_can_POST_detail(self):
+        url = reverse('request-list')
+        response = self.client.post(url, data='{"name": "Vito", "address": "555 Foo St", "zip": "12345"}', content_type='application/json')
+        assert_equal(response.status_code, HTTP_201_CREATED)
