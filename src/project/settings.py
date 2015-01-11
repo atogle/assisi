@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'api'
 )
 
+LOGIN_URL = 'app-signin'
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
