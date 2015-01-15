@@ -11,5 +11,5 @@ urlpatterns = patterns('',
 
     url(r'^', include(web.urls)),
     url(r'^api/v1/', include(api.urls)),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^djangoadmin/', include(admin.site.urls)),
 )
