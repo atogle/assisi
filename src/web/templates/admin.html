@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles%}
 
 {% block title %}Admin | Assisi{% endblock %}
 
@@ -6,4 +7,10 @@
 
 {% block content %}
 
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static "scripts/models.js" %}"></script>
+  <script src="{% static "scripts/views.js" %}"></script>
+  <script src="{% static "scripts/admin.js" %}"></script>
 {% endblock %}
