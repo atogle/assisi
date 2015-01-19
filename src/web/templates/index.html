@@ -1,18 +1,13 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.html' %}
+{% load staticfiles%}
 
-  <title>Make a request</title>
+{% block title %}Make a Request | Assisi{% endblock %}
 
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+{% block styles %}
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
-  <link rel="stylesheet" href="/static/styles.css">
-</head>
+{% endblock %}
 
-<body>
-
+{% block content %}
   <form class="pure-form pure-form-aligned">
     <fieldset>
       <div class="pure-control-group">
@@ -83,9 +78,9 @@
       </div>
     </fieldset>
   </form>
+{% endblock %}
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="//rawgit.com/openplans/django-csrf.js/master/django-csrf.js"></script>
+{% block scripts %}
   <script>
     $.fn.serializeObject = function()
     {
@@ -123,5 +118,4 @@
       })
     });
   </script>
-</body>
-</html>
+{% endblock %}
