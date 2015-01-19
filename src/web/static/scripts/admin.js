@@ -1,8 +1,33 @@
-/*global Backbone */
+/*global Backbone jQuery Handlebars */
 
 var Assisi = Assisi || {};
 
-(function(NS) {
+(function(NS, $) {
+  'use strict';
 
+  NS.app = new Backbone.Marionette.Application();
 
-}(Assisi));
+  NS.app.addRegions({
+    mainRegion: '#main'
+  });
+
+  NS.app.addInitializer(function() {
+    // Handlebars support for Marionette
+    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
+      return Handlebars.compile(rawTemplate);
+    };
+
+    NS.app.requestCollection = new NS.RequestCollection();
+
+    NS.app.mainRegion.show(new NS.RequestListView({
+      collection: NS.app.requestCollection
+    }));
+
+    NS.app.requestCollection.fetch();
+  });
+
+  // Init =====================================================================
+  $(function() {
+    NS.app.start();
+  });
+}(Assisi, jQuery));

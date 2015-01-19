@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 {% load staticfiles%}
+{% load handlebarsjs from jstemplate %}
+
 
 {% block title %}Admin | Assisi{% endblock %}
 
 {% block styles %}{% endblock %}
 
 {% block content %}
-
+  <div id="main"></div>
 {% endblock %}
 
 {% block scripts %}
   <script src="{% static "scripts/models.js" %}"></script>
   <script src="{% static "scripts/views.js" %}"></script>
   <script src="{% static "scripts/admin.js" %}"></script>
+
+  {% handlebarsjs '(.*)' precompile register_partials %}
+
 {% endblock %}

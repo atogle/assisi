@@ -3,9 +3,11 @@
 var Assisi = Assisi || {};
 
 (function(NS) {
-  NS.RequestModel = Backbone.Collection.extend({
-    url: '/api/v1/requests/'
+  NS.RequestCollection = Backbone.Collection.extend({
+    url: '/api/v1/requests/',
+    parse: function(response) {
+      return response.results;
+    }
   });
-
 
 }(Assisi));
