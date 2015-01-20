@@ -7,8 +7,7 @@ var Assisi = Assisi || {};
 
   NS.RequestView = Backbone.Marionette.ItemView.extend({
     template: '#request-item-tpl',
-    tagName: 'tr',
-    className: 'request-item'
+    className: 'request-item panel panel-default'
   });
 
   NS.RequestListView = Backbone.Marionette.CompositeView.extend({
