@@ -6,21 +6,35 @@ var Assisi = Assisi || {};
   'use strict';
 
   NS.RequestFormView = Backbone.Marionette.ItemView.extend({
-    template: '#request-item-form-tpl'
+    template: '#request-item-form-tpl',
+    ui: {
+      editToggle: '.edit-toggle'
+    },
+    events: {
+      'click @ui.editToggle': 'onEditToggleClick'
+    },
+    initialize: function(options) {
+      this.containerView = options.containerView;
+    },
+    onEditToggleClick: function(evt) {
+      evt.preventDefault();
+      this.containerView.toggleEditing();
+    }
+
   });
 
   NS.RequestItemView = Backbone.Marionette.ItemView.extend({
     template: '#request-item-tpl',
     ui: {
-      editLink: '.edit-link'
+      editToggle: '.edit-toggle'
     },
     events: {
-      'click @ui.editLink': 'onEditLinkClick'
+      'click @ui.editToggle': 'onEditToggleClick'
     },
     initialize: function(options) {
       this.containerView = options.containerView;
     },
-    onEditLinkClick: function(evt) {
+    onEditToggleClick: function(evt) {
       evt.preventDefault();
       this.containerView.toggleEditing();
     }
