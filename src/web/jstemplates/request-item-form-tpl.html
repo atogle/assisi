@@ -1,0 +1,53 @@
+<div class="panel-body container">
+  <div class="row">
+    <div class="col-md-9 container">
+
+      <div class="row form-group">
+        <!-- Name -->
+        <div class="col-md-12">
+          <input type="text" class="form-control input-lg" name="name" placeholder="Name" value="{{name}}">
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <!-- Address -->
+        <div class="col-md-4">
+          <input type="text" class="form-control" name="address" placeholder="Address" value="{{address}}">
+        </div>
+
+        <div class="col-md-4">
+          <!-- Phone -->
+          <div class="input-group">
+            <input type="tel" class="form-control" name="home_phone" placeholder="Phone" value="{{home_phone}}">
+
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Mobile <span class="caret"></span></button>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><a href="#">Mobile</a></li>
+                <li><a href="#">Home</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-4">
+          <input type="email" class="form-control" name="email" placeholder="Email" value="{{email}}">
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <!-- Notes -->
+        <div class="col-md-12">
+          <textarea class="form-control" rows="1" name="notes" placeholder="Notes">{{notes}}</textarea>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-md-3 container">
+      .col-md-3
+    </div>
+  </div>
+</div>
