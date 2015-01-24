@@ -18,13 +18,14 @@
         <div class="col-md-4">
           <!-- Phone -->
           <div class="input-group">
-            <input type="tel" class="form-control" name="home_phone" placeholder="Phone" value="{{home_phone}}">
+            <input type="tel" class="form-control" name="phone" placeholder="Phone" value="{{phone}}">
+            <input type="hidden" name="phone_type" value="{{default phone_type "Mobile"}}">
 
             <div class="input-group-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Mobile <span class="caret"></span></button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="phone-type-label">{{default phone_type "Mobile"}}</span> <span class="caret"></span></button>
               <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                <li><a href="#">Mobile</a></li>
-                <li><a href="#">Home</a></li>
+                <li><a href="#" class="phone-type-link">Mobile</a></li>
+                <li><a href="#" class="phone-type-link">Home</a></li>
               </ul>
             </div>
 

@@ -24,9 +24,11 @@ var Assisi = Assisi || {};
       collection: NS.app.requestCollection
     }));
 
-    NS.app.addRegion.show(new NS.RequestAddView({
+    NS.formView = new NS.RequestAddView({
       collection: NS.app.requestCollection
-    }));
+    });
+
+    NS.app.addRegion.show(NS.formView);
 
     NS.app.requestCollection.fetch();
   });

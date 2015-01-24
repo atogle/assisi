@@ -21,7 +21,9 @@
 
         <div class="col-sm-3 col-xs-6">
           <!-- Phone -->
-          <small>{{home_phone}}</small>
+          <small>{{phone}}
+            <span class="glyphicon {{#is phone_type "Home"}}glyphicon-phone-alt{{/is}}{{#is phone_type "Mobile"}}glyphicon-phone{{/is}}"></span>
+          </small>
         </div>
 
         <!-- Email -->

@@ -6,6 +6,13 @@ var Assisi = Assisi || {};
   'use strict';
 
   NS.FormSubmitMixin = {
+    selectPhoneType: function(evt) {
+      evt.preventDefault();
+      var type = evt.target.innerHTML;
+
+      this.ui.phoneTypeInput.val(type);
+      this.ui.phoneTypeLabel.html(type);
+    },
     onSubmit: function(evt) {
       evt.preventDefault();
       var self = this,
@@ -23,7 +30,6 @@ var Assisi = Assisi || {};
         });
 
       }
-
     },
     onSaveSuccess: function(model, response, options) {
       console.log('success', arguments);

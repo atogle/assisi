@@ -9,13 +9,16 @@ var Assisi = Assisi || {};
   _.extend({}, NS.FormSubmitMixin, {
     template: '#request-item-add-form-tpl',
     ui: {
-      form: 'form'
+      form: 'form',
+      phoneTypeLink: '.phone-type-link',
+      phoneTypeInput: '[name="phone_type"]',
+      phoneTypeLabel: '.phone-type-label'
     },
     events: {
-      'submit @ui.form': 'onSubmit'
+      'submit @ui.form': 'onSubmit',
+      'click @ui.phoneTypeLink': 'selectPhoneType'
     },
     onSaveSuccess: function(model, response, options) {
-      console.log('success', arguments);
       this.ui.form.get(0).reset();
     }
 
@@ -26,11 +29,15 @@ var Assisi = Assisi || {};
     template: '#request-item-form-tpl',
     ui: {
       editToggle: '.edit-toggle',
-      form: 'form'
+      form: 'form',
+      phoneTypeLink: '.phone-type-link',
+      phoneTypeInput: '[name="phone_type"]',
+      phoneTypeLabel: '.phone-type-label'
     },
     events: {
       'click @ui.editToggle': 'onEditToggleClick',
-      'submit @ui.form': 'onSubmit'
+      'submit @ui.form': 'onSubmit',
+      'click @ui.phoneTypeLink': 'selectPhoneType'
     },
     initialize: function(options) {
       this.containerView = options.containerView;
@@ -40,7 +47,6 @@ var Assisi = Assisi || {};
       this.containerView.toggleEditing();
     },
     onSaveSuccess: function(model, response, options) {
-      console.log('success', arguments);
       this.containerView.toggleEditing();
     }
   }));
