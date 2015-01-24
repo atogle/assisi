@@ -8,11 +8,15 @@
 {% block styles %}{% endblock %}
 
 {% block content %}
-  <div class="container" id="main"></div>
+  <div class="container">
+    <div id="request-add-region"></div>
+    <div id="request-list-region"></div>
+  </div>
 {% endblock %}
 
 {% block scripts %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.0.0/jquery.serialize-object.compiled.js"></script>
+  <script src="{% static "scripts/mixins.js" %}"></script>
   <script src="{% static "scripts/models.js" %}"></script>
   <script src="{% static "scripts/views.js" %}"></script>
   <script src="{% static "scripts/admin.js" %}"></script>

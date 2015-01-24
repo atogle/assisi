@@ -1,11 +1,28 @@
-/*global Backbone Handlebars jQuery */
+/*global Backbone Handlebars jQuery _ */
 
 var Assisi = Assisi || {};
 
 (function(NS, $) {
   'use strict';
 
-  NS.RequestFormView = Backbone.Marionette.ItemView.extend({
+  NS.RequestAddView = Backbone.Marionette.ItemView.extend(
+  _.extend({}, NS.FormSubmitMixin, {
+    template: '#request-item-form-tpl',
+    ui: {
+      form: 'form'
+    },
+    events: {
+      'submit @ui.form': 'onSubmit'
+    },
+    onSaveSuccess: function(model, response, options) {
+      console.log('success', arguments);
+      this.ui.form.get(0).reset();
+    }
+
+  }));
+
+  NS.RequestFormView = Backbone.Marionette.ItemView.extend(
+  _.extend({}, NS.FormSubmitMixin, {
     template: '#request-item-form-tpl',
     ui: {
       editToggle: '.edit-toggle',
@@ -22,23 +39,11 @@ var Assisi = Assisi || {};
       evt.preventDefault();
       this.containerView.toggleEditing();
     },
-    onSubmit: function(evt) {
-      evt.preventDefault();
-      var self = this,
-          data = this.ui.form.serializeObject();
-      console.log(data);
-
-      this.model.save(data, {
-        success: function(model, response, options) {
-          console.log('success', arguments);
-          self.containerView.toggleEditing();
-        },
-        error: function(model, response, options) {
-          console.log('error', arguments);
-        }
-      });
+    onSaveSuccess: function(model, response, options) {
+      console.log('success', arguments);
+      this.containerView.toggleEditing();
     }
-  });
+  }));
 
   NS.RequestItemView = Backbone.Marionette.ItemView.extend({
     template: '#request-item-tpl',

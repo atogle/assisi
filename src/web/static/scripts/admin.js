@@ -8,22 +8,25 @@ var Assisi = Assisi || {};
   NS.app = new Backbone.Marionette.Application();
 
   NS.app.addRegions({
-    mainRegion: '#main'
+    addRegion: '#request-add-region',
+    listRegion: '#request-list-region'
   });
 
-  NS.app.addInitializer(function() {
-    // Handlebars support for Marionette
-    Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
-      return Handlebars.compile(rawTemplate);
-    };
+  // Handlebars support for Marionette
+  Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
+    return Handlebars.compile(rawTemplate);
+  };
 
+  NS.app.on('start', function() {
     NS.app.requestCollection = new NS.RequestCollection();
 
-    NS.view = new NS.RequestListView({
+    NS.app.listRegion.show(new NS.RequestListView({
       collection: NS.app.requestCollection
-    });
+    }));
 
-    NS.app.mainRegion.show(NS.view);
+    NS.app.addRegion.show(new NS.RequestAddView({
+      collection: NS.app.requestCollection
+    }));
 
     NS.app.requestCollection.fetch();
   });
