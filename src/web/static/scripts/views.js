@@ -7,7 +7,7 @@ var Assisi = Assisi || {};
 
   NS.RequestAddView = Backbone.Marionette.ItemView.extend(
   _.extend({}, NS.FormSubmitMixin, {
-    template: '#request-item-form-tpl',
+    template: '#request-item-add-form-tpl',
     ui: {
       form: 'form'
     },
