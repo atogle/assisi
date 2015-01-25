@@ -10,6 +10,7 @@ env/
 
 # Django stuff:
 *.log
+local_settings.py
 
 # sqlite
 *.sqlite3
