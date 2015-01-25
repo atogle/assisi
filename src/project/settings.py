@@ -70,6 +70,14 @@ DATABASES = {
     }
 }
 
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
+
+# Enable Connection Pooling
+DATABASES['default']['ENGINE'] = 'django_postgrespool'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -87,12 +95,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Make filepaths relative to settings.
+def rel_path(*subs):
+    """Make filepaths relative to this settings file"""
+    root_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.abspath(os.path.join(root_path, *subs))
+
+STATIC_ROOT = rel_path('../../staticfiles')
 STATIC_URL = '/static/'
 
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# Django Rest Framework
 REST_FRAMEWORK = {
     'PAGINATE_BY': 100
 }
+
+LOGIN_REDIRECT_URL = '/admin/'
 
 ##############################################################################
 # Local settings overrides
