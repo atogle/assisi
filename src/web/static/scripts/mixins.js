@@ -1,4 +1,4 @@
-/*global Backbone Handlebars jQuery console _ */
+/*global Backbone Handlebars jQuery console _ google */
 
 var Assisi = Assisi || {};
 
@@ -36,6 +36,18 @@ var Assisi = Assisi || {};
     },
     onSaveError: function(model, response, options) {
       console.log('error', arguments);
+    },
+    initAutocomplete: function() {
+      var self = this;
+
+      console.log('init autocomplete');
+      this.autocomplete = new google.maps.places.Autocomplete(this.ui.address.get(0));
+
+      google.maps.event.addListener(this.autocomplete, 'place_changed', function() {
+        var place = self.autocomplete.getPlace();
+
+        console.log(place);
+      });
     }
   };
 

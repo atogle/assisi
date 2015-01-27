@@ -1,4 +1,4 @@
-/*global Backbone Handlebars jQuery _ */
+/*global Backbone Handlebars jQuery _ google */
 
 var Assisi = Assisi || {};
 
@@ -12,7 +12,8 @@ var Assisi = Assisi || {};
       form: 'form',
       phoneTypeLink: '.phone-type-link',
       phoneTypeInput: '[name="phone_type"]',
-      phoneTypeLabel: '.phone-type-label'
+      phoneTypeLabel: '.phone-type-label',
+      address: '[name="address"]'
     },
     events: {
       'submit @ui.form': 'onSubmit',
@@ -20,8 +21,12 @@ var Assisi = Assisi || {};
     },
     onSaveSuccess: function(model, response, options) {
       this.ui.form.get(0).reset();
+    },
+    onRender: function(evt) {
+      if (!this.autocomplete) {
+        this.initAutocomplete();
+      }
     }
-
   }));
 
   NS.RequestFormView = Backbone.Marionette.ItemView.extend(
@@ -32,7 +37,8 @@ var Assisi = Assisi || {};
       form: 'form',
       phoneTypeLink: '.phone-type-link',
       phoneTypeInput: '[name="phone_type"]',
-      phoneTypeLabel: '.phone-type-label'
+      phoneTypeLabel: '.phone-type-label',
+      address: '[name="address"]'
     },
     events: {
       'click @ui.editToggle': 'onEditToggleClick',
@@ -48,11 +54,17 @@ var Assisi = Assisi || {};
     },
     onSaveSuccess: function(model, response, options) {
       this.containerView.toggleEditing();
+    },
+    onRender: function(evt) {
+      if (!this.autocomplete) {
+        this.initAutocomplete();
+      }
     }
   }));
 
   NS.RequestItemView = Backbone.Marionette.ItemView.extend({
     template: '#request-item-tpl',
+    className: 'panel-body container request-item',
     ui: {
       editToggle: '.edit-toggle'
     },

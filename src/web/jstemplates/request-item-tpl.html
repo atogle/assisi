@@ -1,48 +1,42 @@
-<div class="panel-body container">
-  <div class="row">
-    <div class="col-sm-9 container">
 
-      <div class="row">
-        <!-- Name -->
-        <div class="col-xs-6">
-          <h4><a class="edit-toggle" href="#">{{name}}</a></h4>
-        </div>
-        <div class="col-xs-6">
-          <small class="pull-right"><a href="#"></a></small>
-        </div>
+<div class="row">
+  <div class="col-sm-10 container">
 
+    <div class="row">
+      <!-- Name -->
+      <div class="col-xs-3">
+        <h4>{{name}}</h4>
       </div>
 
-      <div class="row">
-        <!-- Address -->
-        <div class="col-sm-6">
-          <small>{{address}}</small>
-        </div>
-
-        <div class="col-sm-3 col-xs-6">
-          <!-- Phone -->
-          <small>{{phone}}
-            <span class="glyphicon {{#is phone_type "Home"}}glyphicon-phone-alt{{/is}}{{#is phone_type "Mobile"}}glyphicon-phone{{/is}}"></span>
-          </small>
-        </div>
-
-        <!-- Email -->
-        <div class="col-sm-3 col-xs-6">
-          <small>{{email}}</small>
-        </div>
+      <!-- Address -->
+      <div class="col-xs-4">
+        <small>{{address}}</small>
       </div>
 
-      <div class="row">
-        <!-- Notes -->
-        <div class="col-xs-12">
-          <small>{{notes}}</small>
-        </div>
+      <div class="col-xs-2">
+        <small>{{apt}}</small>
       </div>
 
+      <div class="col-xs-3">
+        <!-- Phone -->
+        <small>{{phone}}
+          <span class="glyphicon {{#is phone_type "Home"}}glyphicon-phone-alt{{/is}}{{#is phone_type "Mobile"}}glyphicon-phone{{/is}}"></span>
+        </small>
+      </div>
 
     </div>
-    <div class="col-sm-3 container">
-      .col-md-3
+
+    <div class="row">
+      <!-- Notes -->
+      <div class="col-xs-12">
+        <small>{{notes}}</small>
+      </div>
     </div>
+
+
+  </div>
+  <div class="col-sm-2 container">
+    <small><a class="edit-toggle" href="#">Edit</a></small>
   </div>
 </div>
+
