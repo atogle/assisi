@@ -13,7 +13,12 @@ var Assisi = Assisi || {};
       phoneTypeLink: '.phone-type-link',
       phoneTypeInput: '[name="phone_type"]',
       phoneTypeLabel: '.phone-type-label',
-      address: '[name="address"]'
+      apt: '[name="apt"]',
+      address: '[name="address"]',
+      city: '[name="city"]',
+      state: '[name="state"]',
+      zip: '[name="zip"]'
+
     },
     events: {
       'submit @ui.form': 'onSubmit',
@@ -38,7 +43,11 @@ var Assisi = Assisi || {};
       phoneTypeLink: '.phone-type-link',
       phoneTypeInput: '[name="phone_type"]',
       phoneTypeLabel: '.phone-type-label',
-      address: '[name="address"]'
+      apt: '[name="apt"]',
+      address: '[name="address"]',
+      city: '[name="city"]',
+      state: '[name="state"]',
+      zip: '[name="zip"]'
     },
     events: {
       'click @ui.editToggle': 'onEditToggleClick',

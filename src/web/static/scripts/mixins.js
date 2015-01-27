@@ -40,13 +40,38 @@ var Assisi = Assisi || {};
     initAutocomplete: function() {
       var self = this;
 
-      console.log('init autocomplete');
-      this.autocomplete = new google.maps.places.Autocomplete(this.ui.address.get(0));
+      this.autocomplete = new google.maps.places.Autocomplete(
+        this.ui.address.get(0), {
+          componentRestrictions: {country: 'us'},
+          types: ['geocode'],
+          bounds: new google.maps.LatLngBounds(
+            new google.maps.LatLng(39.628961, -77.167969),
+            new google.maps.LatLng(40.492915, -74.605408)
+          )
+        });
 
+      // don't submit the form on autocomplete select with the enter key
+      google.maps.event.addDomListener(this.ui.address.get(0), 'keydown', function(evt) {
+        if (evt.keyCode === 13) {
+          evt.preventDefault();
+        }
+      });
+
+      // Populate all of the address fields on successful geocode
       google.maps.event.addListener(this.autocomplete, 'place_changed', function() {
-        var place = self.autocomplete.getPlace();
+        var place = self.autocomplete.getPlace(),
+            addressComponents = _.object(_.map(place.address_components, function(obj) {
+                return [obj.types[0], {long_name: obj.long_name, short_name: obj.short_name}];
+            }));
 
-        console.log(place);
+        // blur the address field, focus on apartment
+        self.ui.apt.focus();
+
+        // prefill all the address components
+        self.ui.address.val(addressComponents.street_number.long_name + ' ' + addressComponents.route.long_name);
+        self.ui.city.val(addressComponents.locality.long_name);
+        self.ui.state.val(addressComponents.administrative_area_level_1.short_name);
+        self.ui.zip.val(addressComponents.postal_code.long_name);
       });
     }
   };
