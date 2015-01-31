@@ -30,7 +30,7 @@ var Assisi = Assisi || {};
 
     NS.app.addRegion.show(NS.formView);
 
-    NS.app.requestCollection.fetch();
+    NS.app.requestCollection.fetchAllPages();
   });
 
   // Init =====================================================================
