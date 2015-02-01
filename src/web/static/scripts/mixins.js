@@ -62,16 +62,23 @@ var Assisi = Assisi || {};
         var place = self.autocomplete.getPlace(),
             addressComponents = _.object(_.map(place.address_components, function(obj) {
                 return [obj.types[0], {long_name: obj.long_name, short_name: obj.short_name}];
-            }));
+            })),
+            street_number = addressComponents.street_number ? addressComponents.street_number.long_name : '',
+            street = addressComponents.route ? addressComponents.route.long_name : '',
+            city = addressComponents.locality.long_name,
+            state = addressComponents.administrative_area_level_1.short_name,
+            zip = addressComponents.postal_code.long_name,
+            address = street_number && street ? street_number + ' ' + street : '',
+            dupe;
 
         // blur the address field, focus on apartment
         self.ui.apt.focus();
 
         // prefill all the address components
-        self.ui.address.val(addressComponents.street_number.long_name + ' ' + addressComponents.route.long_name);
-        self.ui.city.val(addressComponents.locality.long_name);
-        self.ui.state.val(addressComponents.administrative_area_level_1.short_name);
-        self.ui.zip.val(addressComponents.postal_code.long_name);
+        self.ui.address.val(address);
+        self.ui.city.val(city);
+        self.ui.state.val(state);
+        self.ui.zip.val(zip);
       });
     }
   };
