@@ -18,7 +18,6 @@ var Assisi = Assisi || {};
       city: '[name="city"]',
       state: '[name="state"]',
       zip: '[name="zip"]'
-
     },
     events: {
       'submit @ui.form': 'onSubmit',
