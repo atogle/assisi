@@ -16,7 +16,15 @@ var Assisi = Assisi || {};
     onSubmit: function(evt) {
       evt.preventDefault();
       var self = this,
-          data = this.ui.form.serializeObject();
+          data = this.ui.form.serializeObject(),
+          collection = this.collection || this.model.collection,
+          model = this.model || new NS.RequestModel(data),
+          dupes = collection.getDupes(model);
+
+      if (dupes.length > 0) {
+        alert('Duplicate record. Nicer message coming. :)');
+        return;
+      }
 
       if (this.model) {
         this.model.save(data, {
@@ -25,10 +33,10 @@ var Assisi = Assisi || {};
         });
       } else if (this.collection) {
         this.collection.create(data, {
+          wait: true,
           success: _.bind(self.onSaveSuccess, self),
           error: _.bind(self.onSaveError, self)
         });
-
       }
     },
     onSaveSuccess: function(model, response, options) {

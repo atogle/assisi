@@ -6,10 +6,9 @@ var Assisi = Assisi || {};
   NS.PaginatedCollection = Backbone.Collection.extend({
     resultsAttr: 'results',
 
-    // parse: function(response) {
-    //   this.metadata = response.metadata;
-    //   return response[this.resultsAttr];
-    // },
+    parse: function(response) {
+      return response[this.resultsAttr];
+    },
 
     fetchNextPage: function(success, error) {
       var collection = this;
@@ -92,11 +91,20 @@ var Assisi = Assisi || {};
     }
   });
 
-
   NS.RequestCollection = NS.PaginatedCollection.extend({
     url: '/api/v1/requests/',
-    parse: function(response) {
-      return response.results;
+    getDupes: function(model) {
+      return this.filter(function(m) {
+        if (model.get('address') === m.get('address') &&
+            model.get('zip') === m.get('zip')) {
+
+          if (model.id !== m.id) {
+            return true;
+          }
+        }
+
+        return false;
+      });
     }
   });
 
