@@ -18,11 +18,12 @@ var Assisi = Assisi || {};
       var self = this,
           data = this.ui.form.serializeObject(),
           collection = this.collection || this.model.collection,
-          model = this.model || new NS.RequestModel(data),
+          model = this.model ? this.model.set(data) : new NS.RequestModel(data),
           dupes = collection.getDupes(model);
 
       if (dupes.length > 0) {
         alert('Duplicate record. Nicer message coming. :)');
+        model.set(model.previousAttributes());
         return;
       }
 
