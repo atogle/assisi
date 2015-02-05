@@ -21,7 +21,8 @@ var Assisi = Assisi || {};
     },
     events: {
       'submit @ui.form': 'onSubmit',
-      'click @ui.phoneTypeLink': 'selectPhoneType'
+      'click @ui.phoneTypeLink': 'selectPhoneType',
+      'blur @ui.address': 'onAddressBlur'
     },
     onSaveSuccess: function(model, response, options) {
       this.ui.form.get(0).reset();
@@ -51,7 +52,8 @@ var Assisi = Assisi || {};
     events: {
       'click @ui.editToggle': 'onEditToggleClick',
       'submit @ui.form': 'onSubmit',
-      'click @ui.phoneTypeLink': 'selectPhoneType'
+      'click @ui.phoneTypeLink': 'selectPhoneType',
+      'blur @ui.address': 'onAddressBlur'
     },
     initialize: function(options) {
       this.containerView = options.containerView;

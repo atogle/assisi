@@ -1,4 +1,4 @@
-/*global Backbone Handlebars jQuery console _ google */
+/*global Backbone Handlebars jQuery console _ google Gatekeeper */
 
 var Assisi = Assisi || {};
 
@@ -13,17 +13,24 @@ var Assisi = Assisi || {};
       this.ui.phoneTypeInput.val(type);
       this.ui.phoneTypeLabel.html(type);
     },
-    onSubmit: function(evt) {
+    onAddressBlur: function(evt) {
+      evt.preventDefault();
+      this.ui.address.get(0).setCustomValidity('');
+    },
+    onSubmit: Gatekeeper.onValidSubmit(function(evt) {
       evt.preventDefault();
       var self = this,
           data = this.ui.form.serializeObject(),
           collection = this.collection || this.model.collection,
-          model = this.model ? this.model.set(data) : new NS.RequestModel(data),
+          model = this.model ? this.model.set(data) : new Backbone.Model(data),
           dupes = collection.getDupes(model);
 
+      this.ui.address.get(0).setCustomValidity('');
+
       if (dupes.length > 0) {
-        alert('Duplicate record. Nicer message coming. :)');
+        this.ui.address.get(0).setCustomValidity('Someone has already made a request for this address.');
         model.set(model.previousAttributes());
+        this.ui.form.submit();
         return;
       }
 
@@ -39,7 +46,7 @@ var Assisi = Assisi || {};
           error: _.bind(self.onSaveError, self)
         });
       }
-    },
+    }),
     onSaveSuccess: function(model, response, options) {
       console.log('success', arguments);
     },

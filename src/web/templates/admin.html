@@ -7,6 +7,7 @@
 
 {% block styles %}
   <link rel="stylesheet" type="text/css" href="{% static "styles/admin.css" %}">
+  <link rel="stylesheet" type="text/css" href="https://rawgit.com/chinchang/hint.css/master/hint.min.css">
 {% endblock %}
 
 {% block content %}
@@ -18,6 +19,7 @@
 
 {% block scripts %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.0.0/jquery.serialize-object.compiled.js"></script>
+  <script src="{% static "scripts/gatekeeper.js" %}"></script>
   <script src="{% static "scripts/mixins.js" %}"></script>
   <script src="{% static "scripts/models.js" %}"></script>
   <script src="{% static "scripts/views.js" %}"></script>

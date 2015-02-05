@@ -1,14 +1,14 @@
 <div class="panel-body container">
-  <form class="row">
+  <form class="row" novalidate>
     <div class="col-md-10 container">
 
-      <div class="row form-group">
+      <div class="row">
         <!-- Name -->
-        <div class="col-sm-8">
+        <div class="col-sm-8 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control input" name="name" placeholder="Name" value="{{name}}" required>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
           <!-- Phone -->
           <div class="input-group">
             <input type="tel" class="form-control" name="phone" placeholder="Phone" value="{{phone}}" required>
@@ -29,33 +29,33 @@
       </div>
 
 
-      <div class="row form-group">
+      <div class="row">
 
         <!-- Address -->
-        <div class="col-sm-4">
+        <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="address" placeholder="Address" value="{{address}}" required>
         </div>
 
-        <div class="col-sm-2">
+        <div class="col-sm-2 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="apt" placeholder="Apt" value="{{apt}}">
         </div>
 
-        <div class="col-sm-2">
+        <div class="col-sm-2 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="city" placeholder="City" value="{{city}}" required>
         </div>
 
-        <div class="col-sm-2">
+        <div class="col-sm-2 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="state" placeholder="State" value="{{state}}" required>
         </div>
 
-        <div class="col-sm-2">
+        <div class="col-sm-2 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="zip" placeholder="Zip" value="{{zip}}" required>
         </div>
       </div>
 
-      <div class="row form-group">
+      <div class="row">
         <!-- Notes -->
-        <div class="col-xs-12">
+        <div class="col-xs-12 form-group hint--bottom hint--error hint--rounded">
           <textarea class="form-control" rows="1" name="notes" placeholder="Notes">{{notes}}</textarea>
         </div>
       </div>
