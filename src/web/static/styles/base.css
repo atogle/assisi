@@ -1,0 +1,11 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.navbar-brand {
+  padding: 5px;
+}
+
+.navbar-brand > img {
+  height: 40px;
+}
