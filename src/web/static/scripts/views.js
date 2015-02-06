@@ -74,12 +74,14 @@ var Assisi = Assisi || {};
 
   NS.RequestItemView = Backbone.Marionette.ItemView.extend({
     template: '#request-item-tpl',
-    className: 'panel-body container request-item',
+    className: 'panel-body request-item',
     ui: {
-      editToggle: '.edit-toggle'
+      editToggle: '.edit-toggle',
+      deleteButton: '.delete-button'
     },
     events: {
-      'click @ui.editToggle': 'onEditToggleClick'
+      'click @ui.editToggle': 'onEditToggleClick',
+      'click @ui.deleteButton': 'onDelete'
     },
     initialize: function(options) {
       this.containerView = options.containerView;
@@ -87,6 +89,16 @@ var Assisi = Assisi || {};
     onEditToggleClick: function(evt) {
       evt.preventDefault();
       this.containerView.toggleEditing();
+    },
+    onDelete: function(evt) {
+      evt.preventDefault();
+      if (window.confirm('Really delete this request? This cannot be undone.')) {
+        this.model.destroy({
+          wait: true,
+          success: function(model, response, options) {},
+          error: function(model, response, options) {}
+        });
+      }
     }
   });
 
