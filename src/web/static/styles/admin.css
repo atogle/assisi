@@ -1,3 +1,22 @@
 .request-item h4 {
   margin: 0;
 }
+
+.alert-container {
+  position: fixed;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  opacity: 0.9;
+
+  transition: top .5s ease-in-out;
+}
+
+.alert-container.show {
+  top: 10px;
+}
+
+.alert-container > .alert {
+    margin: 10px 15%;
+}

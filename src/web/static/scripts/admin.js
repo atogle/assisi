@@ -1,36 +1,45 @@
-/*global Backbone jQuery Handlebars */
+/*global Backbone jQuery Handlebars _ */
 
 var Assisi = Assisi || {};
 
 (function(NS, $) {
   'use strict';
 
-  NS.app = new Backbone.Marionette.Application();
-
-  NS.app.addRegions({
-    addRegion: '#request-add-region',
-    listRegion: '#request-list-region'
-  });
-
   // Handlebars support for Marionette
   Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
     return Handlebars.compile(rawTemplate);
   };
 
+  NS.app = new Backbone.Marionette.Application();
+
   NS.app.on('start', function() {
+    NS.app.appView = new NS.AppView({
+      el: 'body'
+    });
+
     NS.app.requestCollection = new NS.RequestCollection();
 
-    NS.app.listRegion.show(new NS.RequestListView({
+    // Render the list of requests
+    NS.app.appView.listRegion.show(new NS.RequestListView({
       collection: NS.app.requestCollection
     }));
 
-    NS.formView = new NS.RequestAddView({
+    // Render the form for adding new requests
+    NS.app.appView.addRegion.show(new NS.RequestAddView({
       collection: NS.app.requestCollection
+    }));
+
+    // Fetch all of the requests in all of the pages
+    NS.app.requestCollection.fetchAllPages();
+
+    // Listen for alerts to display
+    NS.app.on('alert', function(data) {
+      NS.app.appView.alertRegion.show(new NS.AlertView({
+        model: new Backbone.Model(data)
+      }));
+
     });
 
-    NS.app.addRegion.show(NS.formView);
-
-    NS.app.requestCollection.fetchAllPages();
   });
 
   // Init =====================================================================

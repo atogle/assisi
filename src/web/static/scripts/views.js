@@ -5,6 +5,30 @@ var Assisi = Assisi || {};
 (function(NS, $) {
   'use strict';
 
+  NS.AppView = Backbone.Marionette.LayoutView.extend({
+    regions: {
+      alertRegion: '#alert-region',
+      addRegion: '#request-add-region',
+      listRegion: '#request-list-region'
+    }
+  });
+
+  NS.AlertView = Backbone.Marionette.ItemView.extend({
+    template: '#alert-tpl',
+    className: 'alert-container',
+    onShow: function() {
+      var $el = this.$el;
+
+      _.defer(function() {
+        $el.addClass('show');
+      });
+
+      _.delay(function() {
+        $el.removeClass('show');
+      }, 4000);
+    }
+  });
+
   NS.RequestAddView = Backbone.Marionette.ItemView.extend(
   _.extend({}, NS.FormSubmitMixin, {
     template: '#request-item-add-form-tpl',
@@ -26,6 +50,11 @@ var Assisi = Assisi || {};
     },
     onSaveSuccess: function(model, response, options) {
       this.ui.form.get(0).reset();
+
+      var msg = '<strong>REQUEST SAVED.</strong> ' + model.get('name') + ', ' +
+        model.get('address') + ', ' + model.get('zip');
+
+      NS.app.trigger('alert', {type: 'success', message: msg});
     },
     onRender: function(evt) {
       if (!this.autocomplete) {
@@ -63,7 +92,11 @@ var Assisi = Assisi || {};
       this.containerView.toggleEditing();
     },
     onSaveSuccess: function(model, response, options) {
+      var msg = '<strong>REQUEST SAVED.</strong> ' + model.get('name') + ', ' +
+        model.get('address') + ', ' + model.get('zip');
+
       this.containerView.toggleEditing();
+      NS.app.trigger('alert', {type: 'success', message: msg});
     },
     onRender: function(evt) {
       if (!this.autocomplete) {

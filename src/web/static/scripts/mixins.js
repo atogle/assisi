@@ -48,10 +48,27 @@ var Assisi = Assisi || {};
       }
     }),
     onSaveSuccess: function(model, response, options) {
-      console.log('success', arguments);
+      var msg = '<strong>REQUEST SAVED.</strong> ' + model.get('name') + ', ' +
+        model.get('address') + ', ' + model.get('zip');
+
+      NS.app.trigger('alert', {type: 'success', message: msg});
     },
     onSaveError: function(model, response, options) {
-      console.log('error', arguments);
+      var msg = '<strong>UNABLE TO SAVE.</strong>';
+
+      try {
+        if (response.responseJSON) {
+          msg = msg + _.map(response.responseJSON, function(errors, name) {
+            return ' <em>'+ name +'</em>: ' + errors.join(', ');
+          });
+        } else {
+          msg = msg + ' Cannot reach the server. Check your internet connection.';
+        }
+      } catch(err) {
+        console.log(err);
+      }
+
+      NS.app.trigger('alert', {type: 'danger', message: msg});
     },
     initAutocomplete: function() {
       var self = this;
