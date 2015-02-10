@@ -113,7 +113,8 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Django Rest Framework
 REST_FRAMEWORK = {
-    'PAGINATE_BY': 100
+    'PAGINATE_BY': 500,
+    'PAGINATE_BY_PARAM': 'page_size'
 }
 
 LOGIN_REDIRECT_URL = '/admin/'

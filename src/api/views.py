@@ -1,5 +1,7 @@
 from .models import Request
 from rest_framework import viewsets, routers, permissions
+from rest_framework.renderers import JSONRenderer, JSONPRenderer, BrowsableAPIRenderer
+from .renderers import PaginatedCSVRenderer
 from .serializers import RequestSerializer
 
 
@@ -22,6 +24,7 @@ class RequestViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    renderer_classes = (JSONRenderer, JSONPRenderer, BrowsableAPIRenderer, PaginatedCSVRenderer)
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
     permission_classes = (IsAuthenticatedOrWriteOnly,)
