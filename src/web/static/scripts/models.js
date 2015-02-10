@@ -96,7 +96,8 @@ var Assisi = Assisi || {};
     getDupes: function(model) {
       return this.filter(function(m) {
         if (model.get('address') === m.get('address') &&
-            model.get('zip') === m.get('zip')) {
+            model.get('zip') === m.get('zip') &&
+            model.get('apt') === m.get('apt')) {
 
           if (model.id !== m.id) {
             return true;
