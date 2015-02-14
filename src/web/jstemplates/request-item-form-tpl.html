@@ -59,11 +59,11 @@
           <textarea class="form-control" rows="1" name="notes" placeholder="Notes">{{notes}}</textarea>
         </div>
         <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
-          <select name="partner" class="form-control" required>
-            <option value="">Partner</option>
-            {{#each_partner}}
+          <select name="distribution_site" class="form-control" required>
+            <option value="">Distribution Site</option>
+            {{#each_distribution_site}}
             <option value="{{name}}">{{name}}</option>
-            {{/each_partner}}
+            {{/each_distribution_site}}
           </select>
         </div>
 

@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-import json
 import os
 import yaml
 
@@ -25,7 +24,7 @@ def admin_view(request):
     fileepath = os.path.join(path, 'config.yml')
     config_yml = get_config(fileepath)
     context = {
-        'partners': config_yml['partners']
+        'distribution_sites': config_yml['distribution_sites']
     }
 
     return render(request, 'admin.html', context)
