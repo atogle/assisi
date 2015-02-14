@@ -55,9 +55,18 @@
 
       <div class="row">
         <!-- Notes -->
-        <div class="col-xs-12 form-group hint--bottom hint--error hint--rounded">
+        <div class="col-sm-8 form-group hint--bottom hint--error hint--rounded">
           <textarea class="form-control" rows="1" name="notes" placeholder="Notes">{{notes}}</textarea>
         </div>
+        <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
+          <select name="partner" class="form-control" required>
+            <option value="">Partner</option>
+            {{#each_partner}}
+            <option value="{{name}}">{{name}}</option>
+            {{/each_partner}}
+          </select>
+        </div>
+
       </div>
     </div>
     <div class="col-md-2">
