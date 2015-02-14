@@ -28,7 +28,8 @@ var Assisi = Assisi || {};
       this.ui.address.get(0).setCustomValidity('');
 
       if (dupes.length > 0) {
-        this.ui.address.get(0).setCustomValidity('Someone has already made a request for this address.');
+        this.ui.address.get(0).setCustomValidity(
+          'Someone has already made a request for this address (address, apt, and zip).');
         model.set(model.previousAttributes());
         this.ui.form.submit();
         return;
