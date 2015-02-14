@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load assisi_utils %}
 {% load staticfiles%}
 {% load handlebarsjs from jstemplate %}
 
@@ -48,6 +49,13 @@
   <script src="{% static "scripts/models.js" %}"></script>
   <script src="{% static "scripts/views.js" %}"></script>
   <script src="{% static "scripts/admin.js" %}"></script>
+
+  <script>
+    Assisi.Config = {
+      partners: {{ partners|as_json }}
+    }
+  </script>
+
 
   {% handlebarsjs '(.*)' precompile register_partials %}
 

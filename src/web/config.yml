@@ -1,0 +1,48 @@
+partners:
+  - name: Liberti Collingswood
+    max: 50
+    zips:
+      - '08108'
+      - '08107'
+  - name: Liberti Harrisburg
+    max: 200
+    zips:
+      - '17042'
+      - '17070'
+  - name: Liberti East
+    max: 350
+    zips:
+      - '19122'
+      - '19123'
+      - '19125'
+      - '19133'
+      - '19134'
+  - name: Grace and Peace
+    max: 100
+    zips:
+      - '19140'
+  - name: Liberti Fairmount
+    max: 300
+    zips:
+      - '19121'
+      - '19130'
+  - name: City Light Church
+    max: 200
+    zips:
+      - '19127'
+      - '19128'
+      - '19129'
+  - name: Aquinas Center
+    max: 150
+    zips:
+      - '19145'
+      - '19146'
+      - '19147'
+      - '19148'
+  - name: First Christian Assembly
+    max: 250
+    zips:
+      - '19145'
+      - '19146'
+      - '19147'
+      - '19148'
