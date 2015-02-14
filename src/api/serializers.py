@@ -6,4 +6,4 @@ class RequestSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Request
         fields = ('id', 'name', 'address', 'apt', 'city', 'state', 'zip',
-                  'email', 'phone', 'phone_type')
+                  'partner', 'email', 'phone', 'phone_type')
