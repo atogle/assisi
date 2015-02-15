@@ -46,7 +46,8 @@ var Assisi = Assisi || {};
     events: {
       'submit @ui.form': 'onSubmit',
       'click @ui.phoneTypeLink': 'selectPhoneType',
-      'blur @ui.address': 'onAddressBlur'
+      'blur @ui.address': 'onAddressBlur',
+      'blur @ui.zip': 'onZipBlur'
     },
     onSaveSuccess: function(model, response, options) {
       this.ui.form.get(0).reset();
@@ -82,7 +83,8 @@ var Assisi = Assisi || {};
       'click @ui.editToggle': 'onEditToggleClick',
       'submit @ui.form': 'onSubmit',
       'click @ui.phoneTypeLink': 'selectPhoneType',
-      'blur @ui.address': 'onAddressBlur'
+      'blur @ui.address': 'onAddressBlur',
+      'blur @ui.zip': 'onZipBlur'
     },
     initialize: function(options) {
       this.containerView = options.containerView;

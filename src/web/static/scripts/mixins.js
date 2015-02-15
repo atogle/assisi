@@ -17,19 +17,32 @@ var Assisi = Assisi || {};
       evt.preventDefault();
       this.ui.address.get(0).setCustomValidity('');
     },
+    onZipBlur: function(evt) {
+      evt.preventDefault();
+      this.ui.zip.get(0).setCustomValidity('');
+    },
     onSubmit: Gatekeeper.onValidSubmit(function(evt) {
       evt.preventDefault();
       var self = this,
           data = this.ui.form.serializeObject(),
           collection = this.collection || this.model.collection,
           model = this.model ? this.model.set(data) : new Backbone.Model(data),
-          dupes = collection.getDupes(model);
+          dupes = collection.getDupes(model),
+          validZips = _.uniq(_.flatten(_.pluck(NS.Config.distribution_sites, 'zips')));
 
       this.ui.address.get(0).setCustomValidity('');
 
       if (dupes.length > 0) {
         this.ui.address.get(0).setCustomValidity(
           'Someone has already made a request for this address (address, apt, and zip).');
+        model.set(model.previousAttributes());
+        this.ui.form.submit();
+        return;
+      }
+
+      // if the zip code is out of range
+      if (_.contains(validZips, this.ui.zip.val()) === false) {
+        this.ui.zip.get(0).setCustomValidity('We are not delivering to this zip code.');
         model.set(model.previousAttributes());
         this.ui.form.submit();
         return;
