@@ -1,17 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-import os
-import yaml
-
-
-def get_config(filename):
-    config_file = open(filename)
-    try:
-        config_yml = yaml.load(config_file)
-    finally:
-        config_file.close()
-
-    return config_yml
+from project import assisi_config
 
 
 def index_view(request):
@@ -20,9 +9,7 @@ def index_view(request):
 
 @login_required
 def admin_view(request):
-    path = os.path.abspath(os.path.dirname(__file__))
-    fileepath = os.path.join(path, 'config.yml')
-    config_yml = get_config(fileepath)
+    config_yml = assisi_config.get_config('../project/config.yml')
     context = {
         'distribution_sites': config_yml['distribution_sites']
     }
