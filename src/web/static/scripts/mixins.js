@@ -21,6 +21,27 @@ var Assisi = Assisi || {};
       evt.preventDefault();
       this.ui.zip.get(0).setCustomValidity('');
     },
+    onZipChange: function(evt) {
+      evt.preventDefault();
+      var zip = this.ui.zip.val(),
+          // how many requests have been made for each site
+          distSiteCounts = this.collection.groupBy(function(model) {
+            return model.get('distribution_site');
+          }),
+          // get the first available dist site
+          distSiteConfig = _.find(NS.Config.distribution_sites, function(config) {
+            // if zip matches and the max has not been exceeded
+            if (_.contains(config.zips, zip) && (!distSiteCounts[config.name] ||
+              config.max > distSiteCounts[config.name].length)) {
+              return config;
+            }
+          });
+
+      if (distSiteConfig) {
+        this.ui.dist_site.val(distSiteConfig.name);
+      }
+
+    },
     onSubmit: Gatekeeper.onValidSubmit(function(evt) {
       evt.preventDefault();
       var self = this,
@@ -121,11 +142,11 @@ var Assisi = Assisi || {};
         // blur the address field, focus on apartment
         self.ui.apt.focus();
 
-        // prefill all the address components
-        self.ui.address.val(address);
-        self.ui.city.val(city);
-        self.ui.state.val(state);
-        self.ui.zip.val(zip);
+        // prefill all the address components and trigger change
+        self.ui.address.val(address).change();
+        self.ui.city.val(city).change();
+        self.ui.state.val(state).change();
+        self.ui.zip.val(zip).change();
       });
     }
   };

@@ -41,13 +41,15 @@ var Assisi = Assisi || {};
       address: '[name="address"]',
       city: '[name="city"]',
       state: '[name="state"]',
-      zip: '[name="zip"]'
+      zip: '[name="zip"]',
+      dist_site: '[name="distribution_site"]'
     },
     events: {
       'submit @ui.form': 'onSubmit',
       'click @ui.phoneTypeLink': 'selectPhoneType',
       'blur @ui.address': 'onAddressBlur',
-      'blur @ui.zip': 'onZipBlur'
+      'blur @ui.zip': 'onZipBlur',
+      'change @ui.zip': 'onZipChange'
     },
     onSaveSuccess: function(model, response, options) {
       this.ui.form.get(0).reset();
@@ -77,14 +79,16 @@ var Assisi = Assisi || {};
       address: '[name="address"]',
       city: '[name="city"]',
       state: '[name="state"]',
-      zip: '[name="zip"]'
+      zip: '[name="zip"]',
+      dist_site: '[name="distribution_site"]'
     },
     events: {
       'click @ui.editToggle': 'onEditToggleClick',
       'submit @ui.form': 'onSubmit',
       'click @ui.phoneTypeLink': 'selectPhoneType',
       'blur @ui.address': 'onAddressBlur',
-      'blur @ui.zip': 'onZipBlur'
+      'blur @ui.zip': 'onZipBlur',
+      'change @ui.zip': 'onZipChange'
     },
     initialize: function(options) {
       this.containerView = options.containerView;
