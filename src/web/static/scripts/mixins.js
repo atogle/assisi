@@ -24,8 +24,9 @@ var Assisi = Assisi || {};
     onZipChange: function(evt) {
       evt.preventDefault();
       var zip = this.ui.zip.val(),
+          collection = this.collection || this.model.collection,
           // how many requests have been made for each site
-          distSiteCounts = this.collection.groupBy(function(model) {
+          distSiteCounts = collection.groupBy(function(model) {
             return model.get('distribution_site');
           }),
           // get the first available dist site
