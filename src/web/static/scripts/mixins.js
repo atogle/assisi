@@ -40,7 +40,6 @@ var Assisi = Assisi || {};
       if (distSiteConfig) {
         this.ui.dist_site.val(distSiteConfig.name);
       }
-
     },
     onSubmit: Gatekeeper.onValidSubmit(function(evt) {
       evt.preventDefault();
