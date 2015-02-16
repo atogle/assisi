@@ -17,6 +17,20 @@ def zip_code_validator(attrs):
         raise serializers.ValidationError('We are not delivering to this zip code.')
 
 
+def max_requests_validator(attrs):
+    dist_site_name = attrs['distribution_site']
+    dist_site_config = next((c for c in config['distribution_sites'] if c['name'] == dist_site_name), None)
+
+    if dist_site_config == None:
+        raise serializers.ValidationError('Unknown distribution site %s.' % dist_site_name)
+
+    dist_site_max = dist_site_config['max']
+    dist_site_count = Request.objects.filter(distribution_site=dist_site_name).count()
+    if  dist_site_count >= dist_site_max:
+        raise serializers.ValidationError('No more requests can be made for %s. %d of %d requests have already been made.' %
+            (dist_site_name, dist_site_count, dist_site_max))
+
+
 class RequestSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Request
@@ -28,5 +42,6 @@ class RequestSerializer(serializers.HyperlinkedModelSerializer):
                 fields=('address', 'apt', 'zip'),
                 message='Someone has already made a request for this address (address, apt, and zip).'
             ),
-            zip_code_validator
+            zip_code_validator,
+            max_requests_validator
         ]
