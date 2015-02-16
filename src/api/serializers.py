@@ -3,11 +3,14 @@ from rest_framework import serializers, validators
 from project import assisi_config
 
 
-def zip_code_validator(attrs):
-    config = assisi_config.get_config('../project/config.yml')
+config = assisi_config.get_config('../project/config.yml')
 
-    # pluck zip codes from the config
+
+def zip_code_validator(attrs):
+    # pluck zip code lists from the config
     zips = [sites['zips'] for sites in config['distribution_sites']]
+    # flatten the list
+    zips = sum(zips, [])
     zip = attrs['zip']
 
     if zip not in zips:
