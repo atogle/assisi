@@ -12,3 +12,4 @@ class Request(models.Model):
     email = models.CharField(null=True, blank=True, max_length=200)
     phone = models.CharField(null=True, blank=True, max_length=20)
     phone_type = models.CharField(null=True, blank=True, max_length=20)
+    notes = models.CharField(null=True, blank=True, max_length=1024)
