@@ -2,15 +2,15 @@
   <form novalidate>
       <div class="row">
         <!-- Name -->
-        <div class="col-sm-8 form-group hint--bottom hint--error hint--rounded">
+        <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control input" name="name" placeholder="Name" value="{{name}}" required>
         </div>
 
         <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
           <!-- Phone -->
           <div class="input-group">
-            <input type="tel" class="form-control" name="phone" placeholder="Phone" value="{{phone}}" required>
-            <input type="hidden" name="phone_type" value="{{default phone_type "Mobile"}}">
+            <input type="tel" class="form-control" name="phone" placeholder="Phone 1" value="{{phone}}" required>
+            <input type="hidden" class="phone_type" name="phone_type" value="{{default phone_type "Mobile"}}">
 
             <div class="input-group-btn">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="phone-type-label">{{default phone_type "Mobile"}}</span> <span class="caret"></span></button>
@@ -22,12 +22,12 @@
 
           </div>
         </div>
-        <!--
+
         <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
-          <!-- Phone - ->
+          <!-- Phone -->
           <div class="input-group">
             <input type="tel" class="form-control" name="phone2" placeholder="Phone 2" value="{{phone2}}" required>
-            <input type="hidden" name="phone_type2" value="{{default phone_type2 "Mobile"}}">
+            <input type="hidden" class="phone_type" name="phone_type2" value="{{default phone_type2 "Mobile"}}">
 
             <div class="input-group-btn">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="phone-type-label">{{default phone_type2 "Mobile"}}</span> <span class="caret"></span></button>
@@ -39,7 +39,7 @@
 
           </div>
         </div>
-         -->
+
       </div>
 
 

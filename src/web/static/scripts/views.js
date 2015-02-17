@@ -40,8 +40,6 @@ var Assisi = Assisi || {};
     ui: {
       form: 'form',
       phoneTypeLink: '.phone-type-link',
-      phoneTypeInput: '[name="phone_type"]',
-      phoneTypeLabel: '.phone-type-label',
       apt: '[name="apt"]',
       address: '[name="address"]',
       city: '[name="city"]',
@@ -79,8 +77,6 @@ var Assisi = Assisi || {};
       editToggle: '.edit-toggle',
       form: 'form',
       phoneTypeLink: '.phone-type-link',
-      phoneTypeInput: '[name="phone_type"]',
-      phoneTypeLabel: '.phone-type-label',
       apt: '[name="apt"]',
       address: '[name="address"]',
       city: '[name="city"]',

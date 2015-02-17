@@ -44,7 +44,8 @@ class RequestSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Request
         fields = ('id', 'name', 'address', 'apt', 'city', 'state', 'zip',
-                  'distribution_site', 'email', 'phone', 'phone_type', 'notes')
+                  'distribution_site', 'email', 'phone', 'phone_type',
+                  'phone2', 'phone_type2', 'notes')
         validators = [
             validators.UniqueTogetherValidator(
                 queryset=Request.objects.all(),

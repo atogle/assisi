@@ -2,6 +2,10 @@
   top: 10px;
 }
 
+#request-add-region .edit-toggle {
+  display: none;
+}
+
 .request-item h4 {
   margin: 0;
 }

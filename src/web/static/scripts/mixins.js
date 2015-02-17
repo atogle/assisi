@@ -8,10 +8,13 @@ var Assisi = Assisi || {};
   NS.FormSubmitMixin = {
     selectPhoneType: function(evt) {
       evt.preventDefault();
-      var type = evt.target.innerHTML;
+      var type = evt.currentTarget.innerHTML,
+          $parent = $(evt.currentTarget).parents('.input-group'),
+          $input = $parent.find('.phone_type'),
+          $label = $parent.find('.phone-type-label');
 
-      this.ui.phoneTypeInput.val(type);
-      this.ui.phoneTypeLabel.html(type);
+      $input.val(type);
+      $label.html(type);
     },
     onAddressBlur: function(evt) {
       evt.preventDefault();

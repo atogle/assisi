@@ -13,17 +13,27 @@
         <small>{{address}}, {{city}}, {{state}} {{zip}}</small>
       </div>
 
-      <div class="col-sm-2">
+      <div class="col-sm-1">
         <small>{{apt}}</small>
       </div>
 
-      <div class="col-sm-3">
+      <div class="col-sm-2">
         <!-- Phone -->
         <small>{{phone}}
           <span class="glyphicon {{#is phone_type "Home"}}glyphicon-phone-alt{{/is}}{{#is phone_type "Mobile"}}glyphicon-phone{{/is}}"></span>
         </small>
+
+        {{#if phone2}}
+        <br>
+        <small>{{phone2}}
+          <span class="glyphicon {{#is phone_type2 "Home"}}glyphicon-phone-alt{{/is}}{{#is phone_type2 "Mobile"}}glyphicon-phone{{/is}}"></span>
+        </small>
+        {{/if}}
       </div>
 
+      <div class="col-sm-2">
+        <small>{{distribution_site}}</small>
+      </div>
     </div>
 
     <div class="row">
