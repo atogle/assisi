@@ -1,3 +1,7 @@
+#sidebar-region.affix {
+  top: 10px;
+}
+
 .request-item h4 {
   margin: 0;
 }
@@ -19,4 +23,16 @@
 
 .alert-container > .alert {
     margin: 10px 15%;
+}
+
+@media (min-width: 992px) {
+  #sidebar-region.affix {
+    width: 213px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #sidebar-region.affix {
+    width: 263px;
+  }
 }

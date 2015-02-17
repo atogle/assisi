@@ -29,6 +29,8 @@ var Assisi = Assisi || {};
       collection: NS.app.requestCollection
     }));
 
+    NS.app.appView.sidebarRegion.show(new NS.SidebarView());
+
     // Fetch all of the requests in all of the pages
     NS.app.requestCollection.fetchAllPages();
 
@@ -37,7 +39,6 @@ var Assisi = Assisi || {};
       NS.app.appView.alertRegion.show(new NS.AlertView({
         model: new Backbone.Model(data)
       }));
-
     });
 
   });

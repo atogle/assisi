@@ -9,8 +9,13 @@ var Assisi = Assisi || {};
     regions: {
       alertRegion: '#alert-region',
       addRegion: '#request-add-region',
-      listRegion: '#request-list-region'
+      listRegion: '#request-list-region',
+      sidebarRegion: '#sidebar-region'
     }
+  });
+
+  NS.SidebarView = Backbone.Marionette.ItemView.extend({
+    template: '#sidebar-tpl'
   });
 
   NS.AlertView = Backbone.Marionette.ItemView.extend({
