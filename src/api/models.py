@@ -1,7 +1,15 @@
 from django.db import models
 
 
-class Request(models.Model):
+class TimeStampedModel (models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class Request(TimeStampedModel):
     name = models.CharField(null=True, blank=True, max_length=60)
     address = models.CharField(null=True, blank=True, max_length=200)
     apt = models.CharField(null=True, blank=True, max_length=200)
