@@ -21,6 +21,10 @@ var Assisi = Assisi || {};
       evt.preventDefault();
       this.ui.zip.get(0).setCustomValidity('');
     },
+    onDistSiteBlur: function(evt) {
+      evt.preventDefault();
+      this.ui.dist_site.get(0).setCustomValidity('');
+    },
     onZipChange: function(evt) {
       evt.preventDefault();
       var zip = this.ui.zip.val(),
@@ -49,9 +53,14 @@ var Assisi = Assisi || {};
           collection = this.collection || this.model.collection,
           model = this.model ? this.model.set(data) : new Backbone.Model(data),
           dupes = collection.getDupes(model),
-          validZips = _.uniq(_.flatten(_.pluck(NS.Config.distribution_sites, 'zips')));
+          validZips = _.uniq(_.flatten(_.pluck(NS.Config.distribution_sites, 'zips'))),
+          zip = this.ui.zip.val(),
+          distSiteName = this.ui.dist_site.val(),
+          distSiteConfig = _.findWhere(NS.Config.distribution_sites, {'name': distSiteName});
 
       this.ui.address.get(0).setCustomValidity('');
+      this.ui.zip.get(0).setCustomValidity('');
+      this.ui.dist_site.get(0).setCustomValidity('');
 
       if (dupes.length > 0) {
         this.ui.address.get(0).setCustomValidity(
@@ -62,8 +71,16 @@ var Assisi = Assisi || {};
       }
 
       // if the zip code is out of range
-      if (_.contains(validZips, this.ui.zip.val()) === false) {
+      if (_.contains(validZips, zip) === false) {
         this.ui.zip.get(0).setCustomValidity('We are not delivering to this zip code.');
+        model.set(model.previousAttributes());
+        this.ui.form.submit();
+        return;
+      }
+
+      // if zip code and distribution site don't match
+      if (_.contains(distSiteConfig.zips, zip) === false) {
+        this.ui.dist_site.get(0).setCustomValidity(distSiteName + ' does not deliver to zip code ' + zip);
         model.set(model.previousAttributes());
         this.ui.form.submit();
         return;

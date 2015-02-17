@@ -48,6 +48,7 @@ var Assisi = Assisi || {};
       'submit @ui.form': 'onSubmit',
       'click @ui.phoneTypeLink': 'selectPhoneType',
       'blur @ui.address': 'onAddressBlur',
+      'blur @ui.dist_site': 'onDistSiteBlur',
       'blur @ui.zip': 'onZipBlur',
       'change @ui.zip': 'onZipChange'
     },
@@ -87,6 +88,7 @@ var Assisi = Assisi || {};
       'submit @ui.form': 'onSubmit',
       'click @ui.phoneTypeLink': 'selectPhoneType',
       'blur @ui.address': 'onAddressBlur',
+      'blur @ui.dist_site': 'onDistSiteBlur',
       'blur @ui.zip': 'onZipBlur',
       'change @ui.zip': 'onZipChange'
     },
