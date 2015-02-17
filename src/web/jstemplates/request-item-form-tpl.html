@@ -1,7 +1,5 @@
 <div class="panel-body">
-  <form class="row" novalidate>
-    <div class="col-md-10">
-
+  <form novalidate>
       <div class="row">
         <!-- Name -->
         <div class="col-sm-8 form-group hint--bottom hint--error hint--rounded">
@@ -24,41 +22,54 @@
 
           </div>
         </div>
+        <!--
+        <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
+          <!-- Phone - ->
+          <div class="input-group">
+            <input type="tel" class="form-control" name="phone2" placeholder="Phone 2" value="{{phone2}}" required>
+            <input type="hidden" name="phone_type2" value="{{default phone_type2 "Mobile"}}">
 
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="phone-type-label">{{default phone_type2 "Mobile"}}</span> <span class="caret"></span></button>
+              <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><a href="#" class="phone-type-link">Mobile</a></li>
+                <li><a href="#" class="phone-type-link">Home</a></li>
+              </ul>
+            </div>
 
+          </div>
+        </div>
+         -->
       </div>
 
 
       <div class="row">
 
         <!-- Address -->
-        <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
+        <div class="col-xs-8 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="address" placeholder="Address" value="{{address}}" required>
         </div>
 
-        <div class="col-sm-2 form-group hint--bottom hint--error hint--rounded">
+        <div class="col-xs-4 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="apt" placeholder="Apt" value="{{apt}}">
         </div>
 
-        <div class="col-sm-2 form-group hint--bottom hint--error hint--rounded">
+      </div>
+      <div class="row">
+
+        <div class="col-xs-4 col-sm-4 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="city" placeholder="City" value="{{city}}" required>
         </div>
 
-        <div class="col-sm-2 form-group hint--bottom hint--error hint--rounded">
+        <div class="col-xs-4 col-sm-2 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="state" placeholder="State" value="{{state}}" required>
         </div>
 
-        <div class="col-sm-2 form-group hint--bottom hint--error hint--rounded">
+        <div class="col-xs-4 col-sm-2 form-group hint--bottom hint--error hint--rounded">
           <input type="text" class="form-control" name="zip" placeholder="Zip" value="{{zip}}" required>
         </div>
-      </div>
 
-      <div class="row">
-        <!-- Notes -->
-        <div class="col-sm-8 form-group hint--bottom hint--error hint--rounded">
-          <textarea class="form-control" rows="1" name="notes" placeholder="Notes">{{notes}}</textarea>
-        </div>
-        <div class="col-sm-4 form-group hint--bottom hint--error hint--rounded">
+        <div class="col-xs-12 col-sm-4 form-group hint--bottom hint--error hint--rounded">
           <select name="distribution_site" class="form-control" required>
             {{#select distribution_site}}
             <option value="">Distribution Site</option>
@@ -70,10 +81,16 @@
         </div>
 
       </div>
-    </div>
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-primary">Save</button>
-      <a class="edit-toggle" href="#">Cancel</a>
-    </div>
+
+      <div class="row">
+        <!-- Notes -->
+        <div class="col-sm-8 form-group hint--bottom hint--error hint--rounded">
+          <textarea class="form-control" rows="1" name="notes" placeholder="Notes">{{notes}}</textarea>
+        </div>
+        <div class="col-sm-4 form-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a class="edit-toggle" href="#">Cancel</a>
+        </div>
+      </div>
   </form>
 </div>
