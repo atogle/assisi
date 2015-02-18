@@ -39,10 +39,13 @@ INSTALLED_APPS = (
 
     'jstemplate',
     'rest_framework',
+    'custom_user',
+
     'web',
     'api'
 )
 
+AUTH_USER_MODEL = 'custom_user.EmailUser'
 LOGIN_URL = 'app-signin'
 
 MIDDLEWARE_CLASSES = (

@@ -2,6 +2,7 @@ Django==1.7.1
 PyYAML==3.11
 SQLAlchemy==0.9.8
 dj-database-url==0.3.0
+django-custom-user==0.5
 django-jstemplate==1.3.7
 django-nose==1.3
 django-postgrespool==0.3.0
