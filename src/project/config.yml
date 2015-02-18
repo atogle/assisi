@@ -1,6 +1,6 @@
 distribution_sites:
   - name: Aquinas Center
-    max: 150
+    max: 100
     zips:
       - '19145'
       - '19146'
@@ -22,7 +22,15 @@ distribution_sites:
   - name: Grace and Peace
     max: 100
     zips:
+      - '19120'
+      - '19122'
+      - '19124'
+      - '19125'
+      - '19124'
+      - '19133'
+      - '19134'
       - '19140'
+      - '19141'
   - name: Liberti Collingswood
     max: 50
     zips:
