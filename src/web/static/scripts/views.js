@@ -15,7 +15,12 @@ var Assisi = Assisi || {};
   });
 
   NS.SidebarView = Backbone.Marionette.ItemView.extend({
-    template: '#sidebar-tpl'
+    template: '#sidebar-tpl',
+    collectionEvents: {
+      add: 'render',
+      remove: 'render',
+      reset: 'render'
+    }
   });
 
   NS.AlertView = Backbone.Marionette.ItemView.extend({

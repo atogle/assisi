@@ -29,7 +29,9 @@ var Assisi = Assisi || {};
       collection: NS.app.requestCollection
     }));
 
-    NS.app.appView.sidebarRegion.show(new NS.SidebarView());
+    NS.app.appView.sidebarRegion.show(new NS.SidebarView({
+      collection: NS.app.requestCollection
+    }));
 
     // Fetch all of the requests in all of the pages
     NS.app.requestCollection.fetchAllPages();
@@ -41,6 +43,10 @@ var Assisi = Assisi || {};
       }));
     });
 
+    // Check for data updates every minute
+    setInterval(function() {
+      NS.app.requestCollection.fetchAllPages();
+    }, 60000);
   });
 
   // Init =====================================================================

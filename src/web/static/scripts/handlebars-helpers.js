@@ -22,6 +22,12 @@ var Assisi = Assisi || {};
     return result;
   });
 
+  Handlebars.registerHelper('distribution_site_meal_count', function(collectionArray, siteName, options) {
+    var mealsBySite = _.groupBy(collectionArray, 'distribution_site'),
+        siteMeals = mealsBySite[siteName];
+    return siteMeals ? siteMeals.length : 0;
+  });
+
   Handlebars.registerHelper('select', function(value, options) {
     var $el = $('<div/>').html(options.fn(this)),
       selectValue = function(v) {
