@@ -1,5 +1,5 @@
 from .models import Request
-from rest_framework import viewsets, routers, permissions
+from rest_framework import viewsets, routers, permissions, filters
 from rest_framework.renderers import JSONRenderer, JSONPRenderer, BrowsableAPIRenderer
 from .renderers import PaginatedCSVRenderer
 from .serializers import RequestSerializer
@@ -28,6 +28,8 @@ class RequestViewSet(viewsets.ModelViewSet):
     queryset = Request.objects.all()
     serializer_class = RequestSerializer
     permission_classes = (IsAuthenticatedOrWriteOnly,)
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('distribution_site',)
 
 router = routers.DefaultRouter()
 router.register('requests', RequestViewSet)
