@@ -47,4 +47,10 @@ var Assisi = Assisi || {};
   });
 
 
+  Handlebars.registerHelper('download_url_root', function() {
+    return NS.Config.download_url_root;
+  });
+
+
+
 }(Assisi, jQuery));

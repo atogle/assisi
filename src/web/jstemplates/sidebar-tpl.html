@@ -1,4 +1,8 @@
 {{#each_distribution_site}}
-<h4>{{ name }} <span class="badge">{{distribution_site_meal_count ../items name}}/{{max}}</span></h4>
-<small class="text-muted">{{join zips ", "}}</small>
+<strong>{{ name }} <span class="badge">{{distribution_site_meal_count ../items name}}/{{max}}</span>
+</strong>
+<p class="text-muted"><small>
+  {{join zips ", "}}
+  <br><a href="{{download_url_root}}?format=csv&page_size=10000&distribution_site={{name}}">Download Data</a>
+</small></p>
 {{/each_distribution_site}}

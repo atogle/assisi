@@ -60,7 +60,8 @@
 
   <script>
     Assisi.Config = {
-      distribution_sites: {{ distribution_sites|as_json }}
+      distribution_sites: {{ distribution_sites|as_json }},
+      download_url_root: '{% url 'request-list' %}'
     }
   </script>
 
