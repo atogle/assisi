@@ -52,5 +52,5 @@ distribution_sites:
   - name: Liberti Harrisburg
     max: 200
     zips:
-      - '17042'
+      - '17043'
       - '17070'
