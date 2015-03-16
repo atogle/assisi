@@ -50,6 +50,9 @@ distribution_sites:
       - '19121'
       - '19130'
       - '19132'
+      - '19139'
+      - '19104'
+      - '19143'
   - name: Liberti Harrisburg
     max: 200
     zips:
