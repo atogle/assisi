@@ -1,6 +1,7 @@
 from .models import Request
 from rest_framework import viewsets, routers, permissions, filters
-from rest_framework.renderers import JSONRenderer, JSONPRenderer, BrowsableAPIRenderer
+from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
+from rest_framework_jsonp.renderers import JSONPRenderer
 from .renderers import PaginatedCSVRenderer
 from .serializers import RequestSerializer
 
