@@ -20,7 +20,8 @@ def forwards(apps, schema_editor):
 
     for name in dist_site_names:
         dist_site = DistributionSite.objects.create(name=name)
-        EventDistributionSiteDetails.objects.using(db_alias).create(distribution_site=dist_site, event=event)
+        details = EventDistributionSiteDetails.objects.using(db_alias).create(distribution_site=dist_site, event=event)
+        Request.objects.filter(distribution_site__iexact=name).update(event_distribution_site_details=details)
 
 
 def reverse(apps, schema_editor):
@@ -43,5 +44,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AddField(
+            model_name='Request',
+            name='event_distribution_site_details',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.EventDistributionSiteDetails', null=True),
+        ),
         migrations.RunPython(forwards, reverse),
     ]
