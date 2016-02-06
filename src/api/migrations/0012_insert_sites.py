@@ -10,8 +10,11 @@ def forwards(apps, schema_editor):
     # if we directly import it, it'll be the wrong version
     Request = apps.get_model('api', 'Request')
     DistributionSite = apps.get_model('api', 'DistributionSite')
+    Event = apps.get_model('api', 'Event')
     db_alias = schema_editor.connection.alias
     dist_site_names = Request.objects.using(db_alias).values_list('distribution_site', flat=True).distinct()
+
+    Event.objects.using(db_alias).create(name='Initial Event', active=False)
 
     for name in dist_site_names:
         DistributionSite.objects.create(name=name)
@@ -21,8 +24,10 @@ def reverse(apps, schema_editor):
     # forwards() creates two Country instances,
     # so reverse() should delete them.
     DistributionSite = apps.get_model('api', 'DistributionSite')
+    Event = apps.get_model('api', 'Event')
     db_alias = schema_editor.connection.alias
     DistributionSite.objects.using(db_alias).all().delete()
+    Event.objects.using(db_alias).all().delete()
 
 
 class Migration(migrations.Migration):
