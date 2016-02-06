@@ -7,8 +7,6 @@ import django.db.models.deletion
 
 
 def forwards(apps, schema_editor):
-    # We get the model from the versioned app registry;
-    # if we directly import it, it'll be the wrong version
     Request = apps.get_model('api', 'Request')
     DistributionSite = apps.get_model('api', 'DistributionSite')
     Event = apps.get_model('api', 'Event')
@@ -25,8 +23,6 @@ def forwards(apps, schema_editor):
 
 
 def reverse(apps, schema_editor):
-    # forwards() creates two Country instances,
-    # so reverse() should delete them.
     DistributionSite = apps.get_model('api', 'DistributionSite')
     Event = apps.get_model('api', 'Event')
     EventDistributionSiteDetails = apps.get_model('api', 'EventDistributionSiteDetails')
