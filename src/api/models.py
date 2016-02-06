@@ -18,10 +18,10 @@ class DistributionSite(TimeStampedModel):
 class Event(TimeStampedModel):
     name = models.CharField(null=True, blank=True, max_length=60)
     active = models.BooleanField()
-    distribution_sites = models.ManyToManyField(DistributionSite, through='DistributionSiteEventDetails')
+    distribution_sites = models.ManyToManyField(DistributionSite, through='EventDistributionSiteDetails')
 
 
-class DistributionSiteEventDetails(TimeStampedModel):
+class EventDistributionSiteDetails(TimeStampedModel):
     distribution_site = models.ForeignKey(DistributionSite, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     max_requests = models.IntegerField(null=True)

@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='DistributionSiteEventDetails',
+            name='EventDistributionSiteDetails',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
@@ -49,14 +49,14 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('name', models.CharField(blank=True, max_length=60, null=True)),
                 ('active', models.BooleanField()),
-                ('distribution_sites', models.ManyToManyField(through='api.DistributionSiteEventDetails', to='api.DistributionSite')),
+                ('distribution_sites', models.ManyToManyField(through='api.EventDistributionSiteDetails', to='api.DistributionSite')),
             ],
             options={
                 'abstract': False,
             },
         ),
         migrations.AddField(
-            model_name='distributionsiteeventdetails',
+            model_name='EventDistributionSiteDetails',
             name='event',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.Event'),
         ),
