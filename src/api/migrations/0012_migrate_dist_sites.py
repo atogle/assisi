@@ -23,14 +23,14 @@ def forwards(apps, schema_editor):
 
 
 def reverse(apps, schema_editor):
-    Request = apps.get_model('api', 'Request')
+    """
+    If you reverse, you will delete out all of the Requests attached to
+    EventDistributionSiteDetails due to cascading deletes.
+    """
     DistributionSite = apps.get_model('api', 'DistributionSite')
     Event = apps.get_model('api', 'Event')
     EventDistributionSiteDetails = apps.get_model('api', 'EventDistributionSiteDetails')
     db_alias = schema_editor.connection.alias
-
-    for dist_site in DistributionSite.objects.all():
-        Request.objects.filter(event_distribution_site_details__distribution_site=dist_site).update(distribution_site=dist_site.name)
 
     DistributionSite.objects.using(db_alias).all().delete()
     Event.objects.using(db_alias).all().delete()
