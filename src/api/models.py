@@ -14,11 +14,17 @@ class DistributionSite(TimeStampedModel):
     name = models.CharField(null=True, blank=True, max_length=60)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Event(TimeStampedModel):
     name = models.CharField(null=True, blank=True, max_length=60)
     active = models.BooleanField()
     distribution_sites = models.ManyToManyField(DistributionSite, through='EventDistributionSiteDetails')
+
+    def __unicode__(self):
+        return self.name
 
 
 class EventDistributionSiteDetails(TimeStampedModel):
@@ -35,6 +41,7 @@ class Request(TimeStampedModel):
     state = models.CharField(null=True, blank=True, max_length=200)
     zip = models.CharField(null=True, blank=True, max_length=200)
     distribution_site = models.CharField(null=True, blank=True, max_length=200)
+    event_distribution_site_details = models.ForeignKey(EventDistributionSiteDetails, on_delete=models.CASCADE)
     email = models.CharField(null=True, blank=True, max_length=200)
     phone = models.CharField(null=True, blank=True, max_length=20)
     phone_type = models.CharField(null=True, blank=True, max_length=20)
