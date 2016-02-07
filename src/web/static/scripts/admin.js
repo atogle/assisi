@@ -34,7 +34,7 @@ var Assisi = Assisi || {};
     }));
 
     // Fetch all of the requests in all of the pages
-    NS.app.requestCollection.fetchAllPages();
+    NS.app.requestCollection.fetch();
 
     // Listen for alerts to display
     NS.app.on('alert', function(data) {
@@ -45,7 +45,7 @@ var Assisi = Assisi || {};
 
     // Check for data updates every minute
     setInterval(function() {
-      NS.app.requestCollection.fetchAllPages();
+      NS.app.requestCollection.fetch();
     }, 60000);
   });
 
