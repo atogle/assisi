@@ -40,6 +40,11 @@ class EventDistributionSiteDetails(TimeStampedModel):
 
 
 class Request(TimeStampedModel):
+    PHONE_CHOICES = (
+        ('home', 'Home'),
+        ('mobile', 'Mobile')
+    )
+
     name = models.CharField(null=True, blank=True, max_length=60)
     address = models.CharField(null=True, blank=True, max_length=200)
     apt = models.CharField(null=True, blank=True, max_length=200)
@@ -50,9 +55,9 @@ class Request(TimeStampedModel):
     event_distribution_site_details = models.ForeignKey(EventDistributionSiteDetails, on_delete=models.CASCADE)
     email = models.CharField(null=True, blank=True, max_length=200)
     phone = models.CharField(null=True, blank=True, max_length=20)
-    phone_type = models.CharField(null=True, blank=True, max_length=20)
+    phone_type = models.CharField(null=True, blank=True, max_length=20, choices=PHONE_CHOICES)
     phone2 = models.CharField(null=True, blank=True, max_length=20)
-    phone_type2 = models.CharField(null=True, blank=True, max_length=20)
+    phone_type2 = models.CharField(null=True, blank=True, max_length=20, choices=PHONE_CHOICES)
     notes = models.CharField(null=True, blank=True, max_length=1024)
 
     def __str__(self):
