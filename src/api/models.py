@@ -41,11 +41,11 @@ class EventDistributionSiteDetails(TimeStampedModel):
 
 class Request(TimeStampedModel):
     PHONE_CHOICES = (
-        ('home', 'Home'),
-        ('mobile', 'Mobile')
+        ('Home', 'Home'),
+        ('Mobile', 'Mobile')
     )
 
-    event_distribution_site_details = models.ForeignKey(EventDistributionSiteDetails, on_delete=models.CASCADE)
+    event_distribution_site_details = models.ForeignKey(EventDistributionSiteDetails, null=True, on_delete=models.CASCADE)
 
     name = models.CharField(null=True, blank=True, max_length=60)
     address = models.CharField(null=True, blank=True, max_length=200)
