@@ -45,6 +45,8 @@ class Request(TimeStampedModel):
         ('mobile', 'Mobile')
     )
 
+    event_distribution_site_details = models.ForeignKey(EventDistributionSiteDetails, on_delete=models.CASCADE)
+
     name = models.CharField(null=True, blank=True, max_length=60)
     address = models.CharField(null=True, blank=True, max_length=200)
     apt = models.CharField(null=True, blank=True, max_length=200)
@@ -52,7 +54,6 @@ class Request(TimeStampedModel):
     state = models.CharField(null=True, blank=True, max_length=200)
     zip = models.CharField(null=True, blank=True, max_length=200)
     distribution_site = models.CharField(null=True, blank=True, max_length=200)
-    event_distribution_site_details = models.ForeignKey(EventDistributionSiteDetails, on_delete=models.CASCADE)
     email = models.CharField(null=True, blank=True, max_length=200)
     phone = models.CharField(null=True, blank=True, max_length=20)
     phone_type = models.CharField(null=True, blank=True, max_length=20, choices=PHONE_CHOICES)
