@@ -17,7 +17,7 @@ class DistributionSite(TimeStampedModel):
     def user_count(self):
         return self.users.count()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -26,7 +26,7 @@ class Event(TimeStampedModel):
     active = models.BooleanField()
     distribution_sites = models.ManyToManyField(DistributionSite, through='EventDistributionSiteDetails')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -34,6 +34,9 @@ class EventDistributionSiteDetails(TimeStampedModel):
     distribution_site = models.ForeignKey(DistributionSite, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     max_requests = models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.event.name + ': ' + self.distribution_site.name
 
 
 class Request(TimeStampedModel):
@@ -51,3 +54,6 @@ class Request(TimeStampedModel):
     phone2 = models.CharField(null=True, blank=True, max_length=20)
     phone_type2 = models.CharField(null=True, blank=True, max_length=20)
     notes = models.CharField(null=True, blank=True, max_length=1024)
+
+    def __str__(self):
+        return self.address
