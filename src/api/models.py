@@ -14,6 +14,9 @@ class DistributionSite(TimeStampedModel):
     name = models.CharField(null=True, blank=True, max_length=60)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
+    def user_count(self):
+        return self.users.count()
+
     def __unicode__(self):
         return self.name
 
