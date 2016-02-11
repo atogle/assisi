@@ -19,4 +19,4 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(DistributionSite)
 class DistributionSiteAdmin(admin.ModelAdmin):
-    list_display = ('name', 'user_count')
+    list_display = ('name', 'address', 'city', 'user_count')
