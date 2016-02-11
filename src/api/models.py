@@ -12,6 +12,12 @@ class TimeStampedModel (models.Model):
 
 class DistributionSite(TimeStampedModel):
     name = models.CharField(null=True, blank=True, max_length=60)
+    address = models.CharField(null=True, blank=True, max_length=200)
+    apt = models.CharField(null=True, blank=True, max_length=200)
+    city = models.CharField(null=True, blank=True, max_length=200)
+    state = models.CharField(null=True, blank=True, max_length=200)
+    zip = models.CharField(null=True, blank=True, max_length=200)
+
     users = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     def user_count(self):
