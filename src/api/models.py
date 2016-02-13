@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 
 
 class TimeStampedModel (models.Model):
@@ -39,6 +40,10 @@ class EventDistributionSiteDetails(TimeStampedModel):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     distribution_site = models.ForeignKey(DistributionSite, on_delete=models.CASCADE)
     max_requests = models.IntegerField(null=True)
+    zip_codes = ArrayField(
+        models.CharField(max_length=5),
+        null=True
+    )
     users = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     def request_count(self):

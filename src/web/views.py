@@ -9,9 +9,22 @@ def index_view(request):
 
 @login_required
 def admin_view(request):
+    events = {}
+    for details in request.user.eventdistributionsitedetails_set.filter(event__active__exact=True):
+        if events.get(details.event.name, None) is None:
+            events[details.event.name] = []
+
+        events[details.event.name].append({
+            'name': details.distribution_site.name,
+            'max_requests': details.max_requests,
+            'zip_codes': details.zip_codes
+        })
+
     config_yml = assisi_config.get_config('../project/config.yml')
+
     context = {
-        'distribution_sites': config_yml['distribution_sites']
+        'distribution_sites': config_yml['distribution_sites'],
+        'events': events
     }
 
     return render(request, 'admin.html', context)
