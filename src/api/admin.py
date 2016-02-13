@@ -9,7 +9,7 @@ class RequestAdmin(admin.ModelAdmin):
 
 @admin.register(EventDistributionSiteDetails)
 class EventDistributionSiteDetailsAdmin(admin.ModelAdmin):
-    list_display = ('event', 'distribution_site', 'max_requests')
+    list_display = ('event', 'distribution_site', 'request_count', 'max_requests', 'user_count')
 
 
 @admin.register(Event)
@@ -19,4 +19,4 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(DistributionSite)
 class DistributionSiteAdmin(admin.ModelAdmin):
-    list_display = ('name', 'address', 'city', 'user_count')
+    list_display = ('name', 'address', 'city')

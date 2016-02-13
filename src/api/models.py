@@ -18,11 +18,6 @@ class DistributionSite(TimeStampedModel):
     state = models.CharField(null=True, blank=True, max_length=200)
     zip = models.CharField(null=True, blank=True, max_length=200)
 
-    users = models.ManyToManyField(settings.AUTH_USER_MODEL)
-
-    def user_count(self):
-        return self.users.count()
-
     def __str__(self):
         return self.name
 
@@ -37,9 +32,16 @@ class Event(TimeStampedModel):
 
 
 class EventDistributionSiteDetails(TimeStampedModel):
-    distribution_site = models.ForeignKey(DistributionSite, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    distribution_site = models.ForeignKey(DistributionSite, on_delete=models.CASCADE)
     max_requests = models.IntegerField(null=True)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL)
+
+    def request_count(self):
+        return self.request_set.count()
+
+    def user_count(self):
+        return self.users.count()
 
     def __str__(self):
         return self.event.name + ': ' + self.distribution_site.name
