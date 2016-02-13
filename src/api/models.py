@@ -21,6 +21,10 @@ class DistributionSite(TimeStampedModel):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Distribution Site'
+        verbose_name_plural = 'Distribution Sites'
+
 
 class Event(TimeStampedModel):
     name = models.CharField(null=True, blank=True, max_length=60)
@@ -45,6 +49,10 @@ class EventDistributionSiteDetails(TimeStampedModel):
 
     def __str__(self):
         return self.event.name + ': ' + self.distribution_site.name
+
+    class Meta:
+        verbose_name = 'Event Distribution Site Details'
+        verbose_name_plural = 'Event Distribution Site Details'
 
 
 class Request(TimeStampedModel):
