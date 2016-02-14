@@ -14,6 +14,7 @@ def admin_view(request):
             events[details.event.name] = []
 
         events[details.event.name].append({
+            'id': details.id,
             'name': details.distribution_site.name,
             'max_requests': details.max_requests,
             'zip_codes': details.zip_codes
