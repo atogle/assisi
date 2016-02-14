@@ -22,9 +22,9 @@ var Assisi = Assisi || {};
     return result;
   });
 
-  Handlebars.registerHelper('distribution_site_meal_count', function(collectionArray, siteName, options) {
-    var mealsBySite = _.groupBy(collectionArray, 'distribution_site'),
-        siteMeals = mealsBySite[siteName];
+  Handlebars.registerHelper('distribution_site_meal_count', function(collectionArray, id, options) {
+    var mealsBySite = _.groupBy(collectionArray, 'event_distribution_site_details'),
+        siteMeals = mealsBySite[id];
     return siteMeals ? siteMeals.length : 0;
   });
 
