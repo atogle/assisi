@@ -28,6 +28,11 @@ var Assisi = Assisi || {};
     return siteMeals ? siteMeals.length : 0;
   });
 
+  Handlebars.registerHelper('distribution_site_name', function(id, options) {
+    var details = _.findWhere(NS.Config.distribution_sites, {'id': id});
+    return details.name;
+  });
+
   Handlebars.registerHelper('select', function(value, options) {
     var $el = $('<div/>').html(options.fn(this)),
       selectValue = function(v) {
