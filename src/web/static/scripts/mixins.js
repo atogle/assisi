@@ -39,7 +39,7 @@ var Assisi = Assisi || {};
           // get the first available dist site
           distSiteConfig = _.find(NS.Config.distribution_sites, function(config) {
             // if zip matches and the max has not been exceeded
-            if (_.contains(config.zips, zip) && (!distSiteCounts[config.name] ||
+            if (_.contains(config.zip_codes, zip) && (!distSiteCounts[config.name] ||
               config.max > distSiteCounts[config.name].length)) {
               return config;
             }
@@ -56,7 +56,7 @@ var Assisi = Assisi || {};
           collection = this.collection || this.model.collection,
           model = this.model ? this.model.set(data) : new Backbone.Model(data),
           dupes = collection.getDupes(model),
-          validZips = _.uniq(_.flatten(_.pluck(NS.Config.distribution_sites, 'zips'))),
+          validZips = _.uniq(_.flatten(_.pluck(NS.Config.distribution_sites, 'zip_codes'))),
           zip = this.ui.zip.val(),
           distSiteName = this.ui.dist_site.val(),
           distSiteConfig = _.findWhere(NS.Config.distribution_sites, {'name': distSiteName});
@@ -82,7 +82,7 @@ var Assisi = Assisi || {};
       }
 
       // if zip code and distribution site don't match
-      if (_.contains(distSiteConfig.zips, zip) === false) {
+      if (_.contains(distSiteConfig.zip_codes, zip) === false) {
         this.ui.dist_site.get(0).setCustomValidity(distSiteName + ' does not deliver to zip code ' + zip);
         model.set(model.previousAttributes());
         this.ui.form.submit();
