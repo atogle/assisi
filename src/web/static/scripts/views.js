@@ -50,7 +50,7 @@ var Assisi = Assisi || {};
       city: '[name="city"]',
       state: '[name="state"]',
       zip: '[name="zip"]',
-      dist_site: '[name="distribution_site"]'
+      dist_site: '[name="event_distribution_site_details"]'
     },
     events: {
       'submit @ui.form': 'onSubmit',
@@ -87,7 +87,7 @@ var Assisi = Assisi || {};
       city: '[name="city"]',
       state: '[name="state"]',
       zip: '[name="zip"]',
-      dist_site: '[name="distribution_site"]'
+      dist_site: '[name="event_distribution_site_details"]'
     },
     events: {
       'click @ui.editToggle': 'onEditToggleClick',

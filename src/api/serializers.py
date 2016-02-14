@@ -46,16 +46,14 @@ class EventDistributionSiteDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EventDistributionSiteDetails
-        fields = ('distribution_site', 'event', 'max_requests')
+        fields = ('id', 'distribution_site', 'event', 'max_requests')
 
 
-class RequestSerializer(serializers.HyperlinkedModelSerializer):
-    event_distribution_site_details = EventDistributionSiteDetailsSerializer(read_only=True)
-
+class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
         fields = ('id', 'name', 'address', 'apt', 'city', 'state', 'zip',
-                  'distribution_site', 'email', 'phone', 'phone_type',
+                  'email', 'phone', 'phone_type',
                   'phone2', 'phone_type2', 'notes', 'event_distribution_site_details')
         validators = [
             validators.UniqueTogetherValidator(

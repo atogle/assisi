@@ -46,7 +46,7 @@ var Assisi = Assisi || {};
           });
 
       if (distSiteConfig) {
-        this.ui.dist_site.val(distSiteConfig.name);
+        this.ui.dist_site.val(distSiteConfig.id);
       }
     },
     onSubmit: Gatekeeper.onValidSubmit(function(evt) {
@@ -58,8 +58,11 @@ var Assisi = Assisi || {};
           dupes = collection.getDupes(model),
           validZips = _.uniq(_.flatten(_.pluck(NS.Config.distribution_sites, 'zip_codes'))),
           zip = this.ui.zip.val(),
-          distSiteName = this.ui.dist_site.val(),
-          distSiteConfig = _.findWhere(NS.Config.distribution_sites, {'name': distSiteName});
+          distSiteDetailId = parseInt(this.ui.dist_site.val(), 10),
+          distSiteConfig = _.findWhere(NS.Config.distribution_sites, {'id': distSiteDetailId});
+
+      // str to int
+      data.event_distribution_site_details = distSiteDetailId;
 
       this.ui.address.get(0).setCustomValidity('');
       this.ui.zip.get(0).setCustomValidity('');

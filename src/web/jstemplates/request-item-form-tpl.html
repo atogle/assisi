@@ -70,11 +70,11 @@
         </div>
 
         <div class="col-xs-12 col-sm-4 form-group hint--bottom hint--error hint--rounded">
-          <select name="distribution_site" class="form-control" required>
-            {{#select distribution_site}}
+          <select name="event_distribution_site_details" class="form-control" required>
+            {{#select event_distribution_site_details}}
             <option value="">Distribution Site</option>
             {{#each_distribution_site}}
-            <option value="{{name}}">{{name}}</option>
+            <option value="{{id}}">{{name}}</option>
             {{/each_distribution_site}}
             {{/select}}
           </select>
