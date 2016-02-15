@@ -39,14 +39,14 @@ var Assisi = Assisi || {};
           // get the first available dist site
           distSiteConfig = _.find(NS.Config.distribution_sites, function(config) {
             // if zip matches and the max has not been exceeded
-            if (_.contains(config.zips, zip) && (!distSiteCounts[config.name] ||
+            if (_.contains(config.zip_codes, zip) && (!distSiteCounts[config.name] ||
               config.max > distSiteCounts[config.name].length)) {
               return config;
             }
           });
 
       if (distSiteConfig) {
-        this.ui.dist_site.val(distSiteConfig.name);
+        this.ui.dist_site.val(distSiteConfig.id);
       }
     },
     onSubmit: Gatekeeper.onValidSubmit(function(evt) {
@@ -56,10 +56,13 @@ var Assisi = Assisi || {};
           collection = this.collection || this.model.collection,
           model = this.model ? this.model.set(data) : new Backbone.Model(data),
           dupes = collection.getDupes(model),
-          validZips = _.uniq(_.flatten(_.pluck(NS.Config.distribution_sites, 'zips'))),
+          validZips = _.uniq(_.flatten(_.pluck(NS.Config.distribution_sites, 'zip_codes'))),
           zip = this.ui.zip.val(),
-          distSiteName = this.ui.dist_site.val(),
-          distSiteConfig = _.findWhere(NS.Config.distribution_sites, {'name': distSiteName});
+          distSiteDetailId = parseInt(this.ui.dist_site.val(), 10),
+          distSiteConfig = _.findWhere(NS.Config.distribution_sites, {'id': distSiteDetailId});
+
+      // str to int
+      data.event_distribution_site_details = distSiteDetailId;
 
       this.ui.address.get(0).setCustomValidity('');
       this.ui.zip.get(0).setCustomValidity('');
@@ -82,7 +85,7 @@ var Assisi = Assisi || {};
       }
 
       // if zip code and distribution site don't match
-      if (_.contains(distSiteConfig.zips, zip) === false) {
+      if (_.contains(distSiteConfig.zip_codes, zip) === false) {
         this.ui.dist_site.get(0).setCustomValidity(distSiteName + ' does not deliver to zip code ' + zip);
         model.set(model.previousAttributes());
         this.ui.form.submit();

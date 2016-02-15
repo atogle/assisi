@@ -3,7 +3,15 @@
 var Assisi = Assisi || {};
 
 (function(NS) {
+  NS.RequestModel = Backbone.Model.extend({
+    url: function() {
+      var origUrl = Backbone.Model.prototype.url.call(this);
+      return origUrl + (origUrl.charAt(origUrl.length - 1) === '/' ? '' : '/');
+    }
+  });
+
   NS.RequestCollection = Backbone.Collection.extend({
+    model: NS.RequestModel,
     url: '/api/v1/requests/',
     getDupes: function(model) {
       return this.filter(function(m) {

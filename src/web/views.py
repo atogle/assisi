@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from project import assisi_config
 
 
 def index_view(request):
@@ -9,9 +8,25 @@ def index_view(request):
 
 @login_required
 def admin_view(request):
-    config_yml = assisi_config.get_config('../project/config.yml')
+    events = {}
+    distribution_sites = None
+    for details in request.user.eventdistributionsitedetails_set.filter(event__active__exact=True):
+        if events.get(details.event.name, None) is None:
+            events[details.event.name] = []
+
+        events[details.event.name].append({
+            'id': details.id,
+            'name': details.distribution_site.name,
+            'max_requests': details.max_requests,
+            'zip_codes': details.zip_codes
+        })
+
+    if len(events.values()) > 0:
+        distribution_sites = next(iter(events.values()))
+
     context = {
-        'distribution_sites': config_yml['distribution_sites']
+        # Only use the first event. The UI doesn't currently support multiple events.
+        'distribution_sites': distribution_sites
     }
 
     return render(request, 'admin.html', context)

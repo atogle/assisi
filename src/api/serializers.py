@@ -1,58 +1,44 @@
-from .models import Request
+from .models import Request, EventDistributionSiteDetails
 from rest_framework import serializers, validators
-from project import assisi_config
-
-
-config = assisi_config.get_config('../project/config.yml')
-
-
-def zip_code_validator(attrs):
-    # pluck zip code lists from the config
-    zips = [sites['zips'] for sites in config['distribution_sites']]
-    # flatten the list
-    zips = sum(zips, [])
-    zip = attrs['zip']
-
-    if zip not in zips:
-        raise serializers.ValidationError('We are not delivering to zip code %s.' % zip)
 
 
 def max_requests_validator(attrs):
-    dist_site_name = attrs['distribution_site']
-    dist_site_config = next((c for c in config['distribution_sites'] if c['name'] == dist_site_name), None)
-
-    if dist_site_config == None:
-        raise serializers.ValidationError('Unknown distribution site named %s.' % dist_site_name)
-
-    dist_site_max = dist_site_config['max']
-    dist_site_count = Request.objects.filter(distribution_site=dist_site_name).count()
-    if  dist_site_count >= dist_site_max:
+    details = attrs['event_distribution_site_details']
+    dist_site_count = Request.objects.filter(event_distribution_site_details=details).count()
+    if  dist_site_count >= details.max_requests:
         raise serializers.ValidationError('No more requests can be made for %s. %d of %d requests have already been made.' %
-            (dist_site_name, dist_site_count, dist_site_max))
+            (details.distribution_site, dist_site_count, details.max_requests))
 
 
 def dist_site_zip_match_validator(attrs):
+    details = attrs['event_distribution_site_details']
     zip = attrs['zip']
-    dist_site_name = attrs['distribution_site']
-    dist_site_config = next((c for c in config['distribution_sites'] if c['name'] == dist_site_name), None)
 
-    if zip not in dist_site_config['zips']:
-        raise serializers.ValidationError('%s does not deliver to zip code %s.' % (dist_site_name, zip))
+    if zip not in attrs['event_distribution_site_details'].zip_codes:
+        raise serializers.ValidationError('%s does not deliver to zip code %s.' % (details.distribution_site, zip))
 
 
-class RequestSerializer(serializers.HyperlinkedModelSerializer):
+class EventDistributionSiteDetailsSerializer(serializers.ModelSerializer):
+    distribution_site = serializers.StringRelatedField()
+    event = serializers.StringRelatedField()
+
+    class Meta:
+        model = EventDistributionSiteDetails
+        fields = ('id', 'distribution_site', 'event', 'max_requests')
+
+
+class RequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Request
         fields = ('id', 'name', 'address', 'apt', 'city', 'state', 'zip',
-                  'distribution_site', 'email', 'phone', 'phone_type',
-                  'phone2', 'phone_type2', 'notes')
+                  'email', 'phone', 'phone_type',
+                  'phone2', 'phone_type2', 'notes', 'event_distribution_site_details')
         validators = [
             validators.UniqueTogetherValidator(
                 queryset=Request.objects.all(),
                 fields=('address', 'apt', 'zip'),
                 message='Someone has already made a request for this address (address, apt, and zip).'
             ),
-            zip_code_validator,
+            dist_site_zip_match_validator,
             max_requests_validator,
-            dist_site_zip_match_validator
         ]
