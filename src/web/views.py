@@ -21,7 +21,8 @@ def admin_view(request):
         })
 
     context = {
-        'distribution_sites': events[details.event.name]
+        # Only use the first event. The UI doesn't currently support multiple events.
+        'distribution_sites': next(iter(events.values()))
     }
 
     return render(request, 'admin.html', context)

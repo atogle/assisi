@@ -26,11 +26,15 @@ class RequestViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     renderer_classes = (JSONRenderer, JSONPRenderer, BrowsableAPIRenderer, PaginatedCSVRenderer)
-    queryset = Request.objects.all()
     serializer_class = RequestSerializer
     permission_classes = (IsAuthenticatedOrWriteOnly,)
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('distribution_site',)
 
+    def get_queryset(self):
+        # Return only requests relevant to the current user.
+        ids = self.request.user.eventdistributionsitedetails_set.all().values_list('id', flat=True)
+        return Request.objects.filter(event_distribution_site_details__pk__in=ids)
+
 router = routers.DefaultRouter()
-router.register('requests', RequestViewSet)
+router.register('requests', RequestViewSet, 'request')

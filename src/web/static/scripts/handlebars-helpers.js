@@ -30,7 +30,7 @@ var Assisi = Assisi || {};
 
   Handlebars.registerHelper('distribution_site_name', function(id, options) {
     var details = _.findWhere(NS.Config.distribution_sites, {'id': id});
-    return details.name;
+    return details ? details.name : 'No Distribution Site';
   });
 
   Handlebars.registerHelper('select', function(value, options) {
