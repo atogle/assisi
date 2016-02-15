@@ -86,7 +86,7 @@ var Assisi = Assisi || {};
 
       // if zip code and distribution site don't match
       if (_.contains(distSiteConfig.zip_codes, zip) === false) {
-        this.ui.dist_site.get(0).setCustomValidity(distSiteName + ' does not deliver to zip code ' + zip);
+        this.ui.dist_site.get(0).setCustomValidity('This distribution site does not deliver to ' + zip);
         model.set(model.previousAttributes());
         this.ui.form.submit();
         return;
