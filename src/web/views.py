@@ -5,7 +5,7 @@ from .forms import SingleEventDistributionSiteDetailForm
 
 
 def index_view(request):
-    # User is already assigned to an event/distribution site
+    # User is already assigned to an event/distribution site. Get to work!
     if hasattr(request.user, 'eventdistributionsitedetails_set') and request.user.eventdistributionsitedetails_set.filter(event__active__exact=True).count() > 0:
         return redirect('app-admin')
     else:
@@ -68,6 +68,7 @@ def admin_view(request):
     if len(events.values()) > 0:
         distribution_sites = next(iter(events.values()))
     else:
+        # User has not been assigned to an event/distribution site.
         return redirect('app-profile')
 
     context = {
