@@ -4,6 +4,12 @@
 {% block title %}Signin | Easter Outreach{% endblock %}
 
 {% block content %}
+  <header class="row">
+    <div class="center-block text-center col-md-4">
+      <img class="logo" src="{% static "images/logo2016.png" %}" alt="Easter Outreach">
+    </div>
+  </header>
+
   <div class="container">
 
     <div class="row">
@@ -13,7 +19,7 @@
           {% csrf_token %}
 
           {{ form.non_field_errors }}
-          <h2 class="form-signin-heading">Please sign in</h2>
+          <h2 class="form-signin-heading">Sign in</h2>
 
           <p>
           <label for="inputUsername" class="sr-only">Email</label>
@@ -27,6 +33,10 @@
           <input type="hidden" name="next" value="{{ next }}" />
           <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
+
+        <br>
+        <p>No account? Go ahead and <a href="{% url 'app-register' %}">register</a>.</p>
+
 
       </div>
     </div>

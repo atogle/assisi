@@ -9,3 +9,17 @@ body {
 .navbar-brand > img {
   height: 40px;
 }
+
+header {
+  background-color: #dedede;
+  padding: 3rem 0 4rem;
+  margin-bottom: 2rem;
+}
+
+header .center-block {
+  float: none;
+}
+
+header .logo {
+  height: 50px;
+}
