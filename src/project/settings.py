@@ -22,13 +22,22 @@ SECRET_KEY = '0j&3l38dev3gpbde01^q0cu+rax((-henmh)d@cc@01q17)du5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+            ]
+        }
+    }
+]
 
 # Application definition
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
