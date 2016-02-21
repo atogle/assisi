@@ -1,39 +1,48 @@
 {% extends 'base.html' %}
+{% load staticfiles%}
 
 {% block title %}Register | Easter Outreach{% endblock %}
 
-{% block styles %}
-  <!-- Custom styles for this template -->
-  <link href="{{STATIC_URL}}styles/signin.css" rel="stylesheet">
-{% endblock %}
-
 {% block content %}
+  <header class="row">
+    <div class="center-block text-center col-md-4">
+      <img class="logo" src="{% static "images/logo2016.png" %}" alt="Easter Outreach">
+    </div>
+  </header>
+
   <div class="container">
-    <form class="form-signin" method="post" action="">
-      {% csrf_token %}
 
-      {{ form.non_field_errors }}
-      <h2 class="form-signin-heading">Register</h2>
+    <div class="row">
+      <div class="center-block col-md-4" style="float: none;">
+        <form class="form-signin" method="post" action="">
+          {% csrf_token %}
 
-      <p>
-      {{ form.email.errors }}
-      <label for="inputUsername" class="sr-only">Email</label>
-      <input type="text" name="email" id="inputUsername" class="form-control" placeholder="Email" required autofocus>
-      </p>
+          {{ form.non_field_errors }}
+          <h2 class="form-signin-heading">Register</h2>
 
-      <p>
-      {{ form.password1.errors }}
-      {{ form.password2.errors }}
-      <label for="inputPassword1" class="sr-only">Password</label>
-      <input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
-      <label for="inputPassword2" class="sr-only">Password</label>
-      <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Password Confirmation" required>
-      </p>
+          <p>
+          {{ form.email.errors }}
+          <label for="inputUsername" class="sr-only">Email</label>
+          <input type="text" name="email" id="inputUsername" class="form-control" placeholder="Email" required autofocus>
+          </p>
 
-      <input type="hidden" name="next" value="{{ next }}" />
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-    </form>
+          <p>
+          {{ form.password1.errors }}
+          {{ form.password2.errors }}
+          <label for="inputPassword1" class="sr-only">Password</label>
+          <input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
+          <label for="inputPassword2" class="sr-only">Password</label>
+          <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Password Confirmation" required>
+          </p>
+
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        </form>
+
+        <br>
+        <p>Already have an acount? <a href="{% url 'app-signin' %}">Sign in</a>.</p>
+
+      </div>
+    </div>
 
   </div>
-</form>
 {% endblock %}

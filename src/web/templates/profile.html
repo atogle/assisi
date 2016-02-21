@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load assisi_utils %}
+{% load staticfiles%}
+{% load handlebarsjs from jstemplate %}
+
+{% block title %}Profile | Easter Outreach{% endblock %}
+
+{% block content %}
+  <header class="row">
+    <div class="center-block text-center col-md-4">
+      <img class="logo" src="{% static "images/logo2016.png" %}" alt="Easter Outreach">
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="center-block col-md-4" style="float: none;">
+
+        <form method="post" action="">
+          {% csrf_token %}
+
+          {{ form.non_field_errors }}
+          <h4 class="text-center">Please choose your distribution site for <br><strong>{{ event }}</strong></h4>
+
+          <br>
+          <p class="text-center">
+            {{ form.event_distribution_site_details.errors }}
+            <select name="event_distribution_site_details" class="form-control" >
+              <option value="">Distribution Site</option>
+              {% for ds in distribution_sites %}
+                {% ifequal ds.id selected_distribution_site.id %}
+                  <option value="{{ds.id}}" selected="selected">{{ds.name}}</option>
+                {% else %}
+                  <option value="{{ds.id}}">{{ds.name}}</option>
+                {% endifequal %}
+              {% endfor %}
+            </select>
+          </p>
+          <br>
+
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
