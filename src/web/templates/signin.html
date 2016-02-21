@@ -12,6 +12,16 @@
 
   <div class="container">
 
+    {% if request.GET.email %}
+    <div class="row">
+      <div class="text-center center-block col-md-8" style="float: none;">
+        <div class="alert alert-success" role="alert">
+          User <strong>{{ request.GET.email }}</strong> has been created. Please sign in.
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
     <div class="row">
       <div class="center-block col-md-4" style="float: none;">
 
@@ -23,7 +33,7 @@
 
           <p>
           <label for="inputUsername" class="sr-only">Email</label>
-          <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Email" required autofocus>
+          <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Email" value="{{ request.GET.email }}" required autofocus>
           </p>
           <p>
           <label for="inputPassword" class="sr-only">Password</label>
