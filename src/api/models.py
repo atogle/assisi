@@ -37,8 +37,8 @@ class Event(TimeStampedModel):
 
 
 class EventDistributionSiteDetails(TimeStampedModel):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    distribution_site = models.ForeignKey(DistributionSite, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True)
+    distribution_site = models.ForeignKey(DistributionSite, on_delete=models.SET_NULL, null=True)
     max_requests = models.IntegerField(null=True)
     zip_codes = ArrayField(
         models.CharField(max_length=5),
@@ -53,7 +53,7 @@ class EventDistributionSiteDetails(TimeStampedModel):
         return self.users.count()
 
     def __str__(self):
-        return self.event.name + ': ' + self.distribution_site.name
+        return '[No Event]' if self.event is None else self.event.name + ': ' + '[No Distribution Site]' if self.distribution_site is None else self.distribution_site.name
 
     class Meta:
         verbose_name = 'Event Distribution Site Details'
@@ -66,7 +66,7 @@ class Request(TimeStampedModel):
         ('Mobile', 'Mobile')
     )
 
-    event_distribution_site_details = models.ForeignKey(EventDistributionSiteDetails, null=True, on_delete=models.CASCADE)
+    event_distribution_site_details = models.ForeignKey(EventDistributionSiteDetails, null=True, on_delete=models.SET_NULL)
 
     name = models.CharField(null=True, blank=True, max_length=60)
     address = models.CharField(null=True, blank=True, max_length=200)
