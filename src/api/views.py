@@ -34,7 +34,7 @@ class RequestViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         # Return only requests relevant to the current user.
         ids = self.request.user.eventdistributionsitedetails_set.all().values_list('id', flat=True)
-        return Request.objects.filter(event_distribution_site_details__pk__in=ids)
+        return Request.objects.filter(event_distribution_site_details__pk__in=ids).filter(event_distribution_site_details__event__active=True)
 
 router = routers.DefaultRouter()
 router.register('requests', RequestViewSet, 'request')
