@@ -36,7 +36,7 @@ class RequestSerializer(serializers.ModelSerializer):
         validators = [
             validators.UniqueTogetherValidator(
                 queryset=Request.objects.all(),
-                fields=('address', 'apt', 'zip'),
+                fields=('event_distribution_site_details', 'address', 'apt', 'zip'),
                 message='Someone has already made a request for this address (address, apt, and zip).'
             ),
             dist_site_zip_match_validator,
