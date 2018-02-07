@@ -12,7 +12,7 @@ with open(sys.argv[1], 'r') as routes_file:
 
     for row in routes_csv_file:
         # If it has a record id assigned (it's in the Territory col)
-        if row['Territory']:
+        if 'Territory' in row and row['Territory'] is not '':
             route_num = int(row['Route'])
             request_id = int(row['Territory'])
             # print 'Route %s, #%d' % (route_num, request_id,)
